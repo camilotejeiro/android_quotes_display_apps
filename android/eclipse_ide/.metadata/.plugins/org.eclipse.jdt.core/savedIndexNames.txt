@@ -1,0 +1,1 @@
+INDEX VERSION 1.126+/media/camilo/main_storage/workspaces/camilo_projects/quote_display_apps/android/eclipse_ide/.metadata/.plugins/org.eclipse.jdt.core

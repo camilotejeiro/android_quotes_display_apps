@@ -1,0 +1,33 @@
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.cat.textbookwidget"
+    android:versionCode="1"
+    android:versionName="1.0" >
+
+    <uses-sdk
+        android:minSdkVersion="10"
+        android:targetSdkVersion="22"/>
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+
+    <application
+        android:allowBackup="true"
+        android:icon="@drawable/ic_launcher"
+        android:label="@string/app_name"
+        android:theme="@style/AppTheme" >
+
+        <receiver android:name=".RandomTextBookWidget" >
+		    <intent-filter >
+		        <action 
+		            android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+		    </intent-filter>
+		
+		    <meta-data
+		        android:name="android.appwidget.provider"
+		        android:resource="@xml/widget_info"/>
+		</receiver>
+
+		<activity android:name="com.cat.textbookwidget.WidgetConfiguration" >
+		</activity>
+
+    </application>
+
+</manifest>
