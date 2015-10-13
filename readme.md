@@ -1,5 +1,5 @@
-Quotes Applications Repository
-==============================
+Quote Display Applications
+==========================
 
 Platforms: Android.
 
