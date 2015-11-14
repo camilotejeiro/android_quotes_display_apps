@@ -5,7 +5,7 @@
     <string name="widget_button_label">file</string>
     <string name="configure_screen_title">Widget Configuration</string>
     <string name="configure_screen_message">Please enter path and file name of the text file. </string>
-    <string name="file_dir_name_label">storage/extSdCard/my_quotes.txt</string>
+    <string name="file_dir_name_label">storage/sdcard0/my_quotes.txt</string>
     <string name="ok_label">OK</string>
 
 </resources>
