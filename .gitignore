@@ -1,7 +1,8 @@
+# ======================================================================
+# Standard .gitignore for quotes display android projects
 # Git .gitignore file, this tells git what to ignore and what to 
 # allow to be included in the repo
-
-# Standard .gitignore for android projects
+# ======================================================================
 
 # Ignore any static reference-only projects.
 *-v*
