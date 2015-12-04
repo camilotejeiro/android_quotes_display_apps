@@ -10,35 +10,22 @@
 # Ignore any project personal notes
 *notes/
 
+# Ignore the android studio legacy projects.
+*android_studio_gradle/
+
+# Ignore any android eclipse legacy projects.
+*android_eclipse_ant/
+
 #ignore any private keystore files.
 *.jks
-
-# files for the dex VM
-*.dex
-
-# Java class files
-*.class
-
-# generated files
-bin/
-gen/
 
 # Local configuration file (sdk path, etc)
 local.properties
 
-# Windows thumbnail db
-Thumbs.db
 
-# OSX files
-.DS_Store
-
-# Eclipse project files
-.classpath
-.project
-
-# Android Studio
-*.iml
-.idea
-#.idea/workspace.xml - remove # and delete .idea if it better suit your needs.
-.gradle
-build/
+# gradle specific ignores.
+.gradle/
+*generated/
+*intermediates/
+*tmp/
+*logs/
