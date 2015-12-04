@@ -5,30 +5,48 @@
     android:orientation="vertical" >
     
     <TextView
-        android:id="@+id/title_textView"
+        android:id="@+id/title_text_view"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/configure_screen_title"
         android:textAppearance="?android:attr/textAppearanceLarge" />
-
     <EditText
-        android:id="@+id/file_name"
+        android:id="@+id/file_edit_text"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/file_dir_name_label"
         android:inputType="textMultiLine" />
+        
+    <LinearLayout 
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal" >
+        <Button
+            android:id="@+id/ok_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/ok_label" 
+            android:onClick="saveUserConfiguration"/>
+        <Button
+            android:id="@+id/browse_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/browse_label" 
+            android:onClick="browseFileDirectories"/>
+    </LinearLayout>
     
-        <TextView
-        android:id="@+id/message_textView"
-        android:layout_width="wrap_content"
+    <TextView
+        android:id="@+id/instructions_text_view"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/configure_screen_message"
-        android:textAppearance="?android:attr/textAppearanceSmall" />
-
-    <Button
-        android:id="@+id/ok_button"
-        android:layout_width="wrap_content"
+        android:text="@string/configure_screen_instructions"
+        android:textAppearance="?android:attr/textAppearanceSmall" /> 
+    <EditText
+        android:id="@+id/log_edit_text"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/ok_label" />    
+        android:text="@string/configure_screen_log"
+        android:textAppearance="?android:attr/textAppearanceSmall" 
+        android:editable="false" />   
 
 </LinearLayout>

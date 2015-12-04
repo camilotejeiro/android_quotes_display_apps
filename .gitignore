@@ -7,6 +7,9 @@
 # Ignore any static reference-only projects.
 *-v*
 
+# Ignore any project personal notes
+*notes/
+
 #ignore any private keystore files.
 *.jks
 
