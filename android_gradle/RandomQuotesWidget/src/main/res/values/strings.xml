@@ -1,0 +1,15 @@
+<resources>
+
+    <string name="app_name">Random Quotes Widget</string>
+    <string name="configure_screen_title">Widget Configuration</string>
+    <string name="file_dir_name_label"></string>
+    <string name="configure_screen_instructions">
+        Please enter the paths for the text files with your quotes, 
+        pick multiple files with a file browser or enter them manually.
+        Separate multiple files with the ; character. \n
+        e.g. you can enter: storage/sdcard0/file1.txt;storage/extSdCard/file2.txt 
+    </string>
+    <string name="configure_screen_log">*** Configuration Screen Log *** \n</string>
+    <string name="ok_label">OK</string>
+    <string name="browse_label">Browse</string>
+</resources>
