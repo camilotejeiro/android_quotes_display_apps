@@ -13,6 +13,23 @@ intervals an UI element can read the next quote from the processed text
 file and update the view.
 
 ----
+### Use Cases.
+----
+A person has a text file with some paragraphs(quotes) or notes he/she has 
+made (life quotes, book summaries ...etc).
+
+#### A house picture frame
+He would like to put his notes in a digital picture frame for displaying 
+them in the house/apt ...etc. He uses an old android phone as a picture 
+frame and installs the Random Quotes Application to display a random quote 
+at periodic intervals (every hour, every day ...etc).
+
+#### A personal reminder.
+She would like to keep her notes in her cell-phone and display a new quote 
+on Tap or at periodic Intervals. She install the Random Quotes Widget to 
+display a random quote in her phone home screen at periodic intervals. 
+
+----
 ### Features and  Requirements.
 ----
 
@@ -30,6 +47,8 @@ file and update the view.
 * Configuration screen supports native file browser (if existent)
     > Done.
 
+* Widget Support time update.
+
 * Utilization of re-usable common library.
 
 #### Random Quotes Library.
@@ -39,9 +58,15 @@ file and update the view.
 #### Random Quotes Application.
 
 * Application Supports multiple files
+    > Done.
 
 * Application view displays source and processed file information.
+    > Done.
 
 * Configuration screen supports native file browser (if existent)
+    > Done.
+    
+* Application support timed update.
+    > Done.
 
 * Utilization of re-usable common library.

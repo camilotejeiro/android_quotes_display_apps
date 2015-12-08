@@ -9,25 +9,27 @@ source application_properties.sh
 log_filter_index=0
 log_filter=""
 
+# get length of our classes array
+classes_array_length=${#package_classes[@]}
+
 # ---
 # Build our logcat filters.
 # ---
-# Warnings and above are logged.
+# Putting the package classes from our properties file that we would like 
+# to debug
+for ((index=0; index<classes_array_length; index++))
+do
+    log_tag[log_filter_index]="$package_name.${package_classes[index]}"
+    log_priority[log_filter_index++]='D'
+done
+
+# Warnings and above all are logged.
 log_tag[log_filter_index]='*';
 log_priority[log_filter_index++]='W'
 
-# Add clasess we would like to debug. 
-log_tag[log_filter_index]="$package_name.RandomQuotesWidget";
-log_priority[log_filter_index++]='D'
-log_tag[log_filter_index]="$package_name.AppConfiguration";
-log_priority[log_filter_index++]='D'
-log_tag[log_filter_index]="$package_name.PreferencesStorage";
-log_priority[log_filter_index++]='D'
-
-
 # whitelist our application filters and blacklist(silence) everything else 
-log_tag[log_filter_index]='*'
-log_priority[log_filter_index++]='S'
+# log_tag[log_filter_index]='*'
+# log_priority[log_filter_index++]='S'
 
 # ---
 # Apply logcat filters.

@@ -1,4 +1,4 @@
-package com.cat.randomquoteswidget;
+package com.cat.randomquotesapp;
 
 import android.content.Context;
 import android.content.SharedPreferences;

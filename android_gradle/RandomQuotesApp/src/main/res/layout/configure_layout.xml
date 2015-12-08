@@ -5,46 +5,47 @@
     android:orientation="vertical" >
     
     <TextView
-        android:id="@+id/config_title_textview"
+        android:id="@+id/title_text_view"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/config_title_textview"
+        android:text="@string/configure_screen_title"
         android:textAppearance="?android:attr/textAppearanceLarge" />
     <EditText
-        android:id="@+id/config_files_edittext"
+        android:id="@+id/file_edit_text"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:text="@string/file_dir_name_label"
         android:inputType="textMultiLine" />
         
     <LinearLayout 
-        android:layout_width="fill_parent"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal" >
         <Button
-            android:id="@+id/config_ok_button"
+            android:id="@+id/ok_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/config_ok_button" 
+            android:text="@string/ok_label" 
             android:onClick="saveUserConfiguration"/>
         <Button
-            android:id="@+id/config_browse_button"
+            android:id="@+id/browse_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/config_browse_button" 
+            android:text="@string/browse_label" 
             android:onClick="browseFileDirectories"/>
     </LinearLayout>
     
     <TextView
-        android:id="@+id/config_instructions_textview"
+        android:id="@+id/instructions_text_view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/config_instructions_textview"
+        android:text="@string/configure_screen_instructions"
         android:textAppearance="?android:attr/textAppearanceSmall" /> 
     <EditText
-        android:id="@+id/config_log_edittext"
+        android:id="@+id/log_edit_text"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/config_log_edittext"
+        android:text="@string/configure_screen_log"
         android:textAppearance="?android:attr/textAppearanceSmall" 
         android:editable="false" />   
 

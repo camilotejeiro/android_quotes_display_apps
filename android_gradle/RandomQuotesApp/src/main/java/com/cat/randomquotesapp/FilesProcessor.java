@@ -1,4 +1,4 @@
-package com.cat.randomquoteswidget;
+package com.cat.randomquotesapp;
 
 import java.io.BufferedReader;
 import java.io.IOException;

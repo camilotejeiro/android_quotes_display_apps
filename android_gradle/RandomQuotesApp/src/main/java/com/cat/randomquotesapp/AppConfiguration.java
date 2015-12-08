@@ -1,7 +1,6 @@
-package com.cat.randomquoteswidget;
+package com.cat.randomquotesapp;
 
 import android.app.Activity;
-import android.appwidget.AppWidgetManager;
 import android.content.Context;
 import android.os.Bundle;
 import android.content.Intent;
@@ -13,7 +12,7 @@ import android.widget.EditText;
 /***********************************************************************
  * App Configuration
  * This class simply displays a configure screen 
- * where the user can input the text file(s) he wants the widget to read 
+ * where the user can input the text file(s) he wants the app to read 
  * from.
  * @author C.A.T    ,=,e
  **********************************************************************/
@@ -22,49 +21,30 @@ public class AppConfiguration extends Activity
     private static final String LOG_TAG = AppConfiguration.class.getName();
     
     private static final int PICKFILE_REQUEST_CODE = 1;
-    private static final int PICKFILE_SUCCESS_RESULT_CODE = 1;
+        
+    // we only support one, app instance.
+    private static final int APP_UNIQUE_INSTANCE_ID = 1;
                 
     // view objects.
     private EditText fileEditText;
     private EditText logEditText;
-                
-    // declare and reset our AppwidgetID.
-    private int myAppWidgetId = AppWidgetManager.INVALID_APPWIDGET_ID;
                 
     @Override
     protected void onCreate (Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
         
-        Log.i(LOG_TAG, "Configuration Screen loaded");
-        
-        // Set the result to CANCELED.  This will cause the widget host to cancel
-        // out of the widget placement if they press the back button.
-        setResult(RESULT_CANCELED);
-        
-        // receive the intent and get the unique key.
-        Intent receivedIntent = getIntent();
-        Bundle extras = receivedIntent.getExtras();
-        if (extras != null)
-        {
-            myAppWidgetId = extras.getInt(AppWidgetManager.EXTRA_APPWIDGET_ID, 
-                                            AppWidgetManager.INVALID_APPWIDGET_ID);
-        }
-
-        // Finish if they gave us an intent without a widget ID, we can't proceed.
-        if (myAppWidgetId == AppWidgetManager.INVALID_APPWIDGET_ID) 
-        {
-            finish();
-        }
+        Log.i(LOG_TAG, "onCreate");  
         
         // now we will render the UI for the configure Activity.
         setContentView(R.layout.configure_layout);
 
-        // we will have a file name input that can be configured in the widget.
-        fileEditText = (EditText) findViewById(R.id.config_files_edittext);
+        // we will have a file name input that can be configured.
+        fileEditText = (EditText) findViewById(R.id.file_edit_text);
         
         // Where we will display messages regarding configuration details.
-        logEditText = (EditText) findViewById(R.id.config_log_edittext);
+        logEditText = (EditText) findViewById(R.id.log_edit_text);
+
     }
     
     /**
@@ -75,7 +55,7 @@ public class AppConfiguration extends Activity
      **/
     public void saveUserConfiguration(View view) 
     {
-        Log.i(LOG_TAG, "onClick: Save App configuration");
+        Log.i(LOG_TAG, "saveUserConfiguration");
         
         final Context context = AppConfiguration.this;
         
@@ -85,15 +65,14 @@ public class AppConfiguration extends Activity
         // We will use this var for displaying our results
         String configMessageLog = "";
         
-        // create our preferences storage object, pass our widget specific properties.
-        PreferencesStorage storedPreferences = new PreferencesStorage(myAppWidgetId, context);
+        // create our preferences storage object, pass our app specific properties.
+        final PreferencesStorage storedPreferences = new PreferencesStorage(APP_UNIQUE_INSTANCE_ID, context);
         
         // create our filesProcessor Object, pass our underlying preferences storage. 
         FilesProcessor filesProcessor = new FilesProcessor(storedPreferences);
         
-        configMessageLog = "Our Widget Instance ID: " + myAppWidgetId;
-        Log.d(LOG_TAG, configMessageLog);
-        logEditText.setText("* " +  configMessageLog + "\n");
+        // reset our edit text.
+        logEditText.setText("");
         
         // get the text from the text input view
         String userInput = fileEditText.getText().toString();
@@ -139,21 +118,14 @@ public class AppConfiguration extends Activity
         logEditText.append("***" + configMessageLog + "*** \n");
         
 
-        // When an App Widget uses a configuration Activity, it is 
-        // the responsibility of the Activity to update the App 
-        // the first time when the Widget when configuration is complete.
-        AppWidgetManager appWidgetManager = AppWidgetManager.getInstance(context);
-         
-        // pass back the current processed data.
-        String[] currentDataArray = storedPreferences.getCurrentDataPreferences();
-        RandomQuotesWidget.updateAppWidget(context, appWidgetManager, myAppWidgetId, currentDataArray);
+        // it is the responsibility of the Activity to update the App 
+        // the first time when the configuration is complete.
         
-        // the configuration Activity should always return a result. 
-        // The result should include the App Widget ID passed by 
-        // the Intent that launched the Activity.
-        Intent resultValue = new Intent();
-        resultValue.putExtra(AppWidgetManager.EXTRA_APPWIDGET_ID, myAppWidgetId);
-        setResult(RESULT_OK, resultValue);
+        String [] currentDataArray = filesProcessor.getCurrentParagraph();  
+        // update the app with our current quote.
+        RandomQuotesApp.updateAppView(currentDataArray);
+        
+        setResult(RESULT_OK);
         
         // end the activity.
         finish();
@@ -163,12 +135,12 @@ public class AppConfiguration extends Activity
     /**
      * Browse File Directories
      * Method called by Android onClick "Browse" in our app configuration screen. 
-     * See the onClick property in the configure_layout.xml button element.
+     * See the onClick property in the config   ure_layout.xml button element.
      * @param View  
      **/    
     public void browseFileDirectories(View view) 
     {
-        Log.i(LOG_TAG, "onClick: browse file directories");
+        Log.i(LOG_TAG, "browseFileDirectories");
         
         // We will use this var for displaying our results
         String configMessageLog = "";
@@ -178,7 +150,7 @@ public class AppConfiguration extends Activity
         
         try 
         {
-            startActivityForResult(fileintent, PICKFILE_SUCCESS_RESULT_CODE);
+            startActivityForResult(fileintent, PICKFILE_REQUEST_CODE);
         } 
         catch (ActivityNotFoundException e) 
         {            
@@ -192,9 +164,9 @@ public class AppConfiguration extends Activity
     // called after the browser file picker returns.
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) 
-    {
-        Log.d(LOG_TAG, "onActivityResult"); 
-        Log.d(LOG_TAG, "Request code: " + requestCode + ", Result Code: " + resultCode);
+    { 
+        Log.i(LOG_TAG, "onActivityResult, Request code: " + requestCode 
+            + ", Result Code: " + resultCode);
         
         // check to make sure we received data.
         if (data == null || data.getData() == null)
@@ -219,7 +191,6 @@ public class AppConfiguration extends Activity
         {
             // This is not our request (different request code)
             Log.d(LOG_TAG, "Different request code");
-            return;
         }
     }
 }
