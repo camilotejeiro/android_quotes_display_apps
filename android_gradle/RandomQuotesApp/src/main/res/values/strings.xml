@@ -1,5 +1,6 @@
 <resources>
 
+    <!-- App screen Resources -->
     <string name="app_name">Random Quotes App</string>
     <string name="configure_screen_title">App Configuration</string>
     <string name="file_dir_name_label"></string>

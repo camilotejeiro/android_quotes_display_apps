@@ -1,6 +1,5 @@
 <resources>
     <!-- Configure Screen String resources -->
-    <string name="app_name">Random Quotes Widget</string>
     <string name="config_title_textview">Widget Configuration</string>
     <string name="config_instructions_textview">
         Please enter the paths for the text files with your quotes, 
@@ -13,6 +12,7 @@
     <string name="config_browse_button">Browse</string>
     
     <!-- Widget Screen String resources -->
+    <string name="app_name">Random Quotes Widget</string>
     <string name="widget_file_name_textview">widget_file_name_textview: Loading Configuration</string>
     <string name="widget_update_textview">
         No user preferences found, widget needs to be configured

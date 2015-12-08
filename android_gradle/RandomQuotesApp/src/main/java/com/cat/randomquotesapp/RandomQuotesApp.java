@@ -51,7 +51,7 @@ public class RandomQuotesApp extends Activity
         setContentView(R.layout.app_layout);
         
         // get a handle of our view objects.
-        fileNameView = (TextView) findViewById(R.id.file_name);        
+        fileNameView = (TextView) findViewById(R.id.app_file_name_textview);        
         updateView = (TextView) findViewById(R.id.update);  
         lineNumberView = (TextView) findViewById(R.id.line_number); 
         quotesIndexView = (TextView) findViewById(R.id.quotes_index); 
