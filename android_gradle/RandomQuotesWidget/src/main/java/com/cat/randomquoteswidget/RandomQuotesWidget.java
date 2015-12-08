@@ -12,23 +12,21 @@ import android.widget.RemoteViews;
 /***********************************************************************
  * Random Quotes Widget.
  * Simply takes a text file(s) or multiple text files and displays them 
- * in random order.
+ * in random order in a widget view.
  * @author C.A.T    ,=,e
  **********************************************************************/
 public class RandomQuotesWidget extends AppWidgetProvider
 {    
     private static final String LOG_TAG = RandomQuotesWidget.class.getName();
-        
-    private int myAppWidgetId = AppWidgetManager.INVALID_APPWIDGET_ID;
     
+    // called for periodic or onTap updates.
     @Override 
     public void onUpdate (Context context, AppWidgetManager appWidgetManager, int[] appWidgetIds)
     {
-        Log.i(LOG_TAG, "onUpdate: " + appWidgetIds.length);
-        
+        // push updates to every applicable widget instance.
         for (int i = 0; i < appWidgetIds.length; i++)
         {
-            Log.d(LOG_TAG, "widgetId: " + appWidgetIds[i]);
+            Log.i(LOG_TAG, "onUpdate, widgetId: " + appWidgetIds[i]);
             
             String[] currentQuote = getCurrentQuote(context, appWidgetIds[i]);
 
@@ -49,96 +47,24 @@ public class RandomQuotesWidget extends AppWidgetProvider
                 // update the app with our current quote.
                 updateAppWidget(context, appWidgetManager, appWidgetIds[i], currentQuote); 
             }  
-            
         }
     }
-        
-    /*
-     * We are overriding onReceive because we need to access the actual 
-     * intent to get the passed Ids, the default filters don't allow us 
-     * to get the intent, so we have to do it manually.  
-     */
-    /* @Override
-    public void onReceive(Context context, Intent intent)
-    {
 
-        super.onReceive(context, intent);
-        Log.i(LOG_TAG, "onReceive");
-        
-        // to allow only supported onReceive actions.
-        boolean actionFilter; 
-        
-        // get our received action so we can switch.
-        String intentAction = intent.getAction();
-        
-        Log.d(LOG_TAG, "Intent Action: " + intentAction); 
-        
-       // receive the intent and get the unique key.
-        Bundle extras = intent.getExtras();
-                
-        // filter on our allowed activities.
-        actionFilter = ((intentAction == AppWidgetManager.ACTION_APPWIDGET_UPDATE)
-                    || (intentAction == AppWidgetManager.ACTION_APPWIDGET_DELETED)
-                    || (intentAction == AppWidgetManager.ACTION_APPWIDGET_ENABLED));
-        
-        if (extras != null)
+    // called when a widget instance is removed from the screen.
+    @Override
+    public void onDeleted (Context context, int[] appWidgetIds)
+    {
+        // clean up all resources for every applicable widget instance.
+        for (int i = 0; i < appWidgetIds.length; i++)
         {
-            myAppWidgetId = extras.getInt(AppWidgetManager.EXTRA_APPWIDGET_ID, 
-                AppWidgetManager.INVALID_APPWIDGET_ID);
-        }
-        // if our action is not applicable or we didn't get a valid widget ID, 
-        // just return.
-        // either these is not one of our supported actions or the receiver 
-        // intent has no extras or invalid ID. (e.g. the first time widget_file_name_textview 
-        // is called - it shouldn't be called while on config; This is a 
-        // reported Android Bug).
-        if ((actionFilter == false) || (myAppWidgetId == AppWidgetManager.INVALID_APPWIDGET_ID))  
-        {
-                Log.i(LOG_TAG, "Not applicable onReceive action or invalid widget ID"); 
-        }
-        else
-        {
-            Log.d(LOG_TAG, "App Widget ID: " + myAppWidgetId);
+            Log.i(LOG_TAG, "onDeleted, widgetId: " + appWidgetIds[i]);
             
             // Create our stored preferences object
-            PreferencesStorage storedPreferences = new PreferencesStorage(myAppWidgetId, context);
+            PreferencesStorage storedPreferences = new PreferencesStorage(context, appWidgetIds[i]);
             
-            if (intentAction == AppWidgetManager.ACTION_APPWIDGET_UPDATE)
-            {
-                
-                String[] currentDataArray = storedPreferences.getCurrentDataPreferences();
-
-                // check to see if we've reached the end then we need to re-process our files.
-                if (currentDataArray == null)
-                {
-                    // Create our fileProcessing object.
-                    FilesProcessor filesProcessor = new FilesProcessor(storedPreferences);
-                    
-                    // process our text files, generate current data and store it.
-                    filesProcessor.processTextFiles();
-                    
-                    // now, we can get new data.
-                    currentDataArray = storedPreferences.getCurrentDataPreferences();
-
-                }
-                
-                AppWidgetManager appWidgetManager = AppWidgetManager.getInstance(context);
-                
-                // widget_file_name_textview the widget with our current quote.
-                updateAppWidget(context, appWidgetManager, myAppWidgetId, currentDataArray); 
-            }
-            else if(intentAction == AppWidgetManager.ACTION_APPWIDGET_DELETED)
-            {
-                // make sure we delete our preferences files for this instance.
-                storedPreferences.deleteAllPreferences();
-            }
-            else
-            {
-                Log.e(LOG_TAG, "Unsupported action, check your action filters");
-            }
+            storedPreferences.deleteAllPreferences();
         }
-        
-    }*/
+    }
 
     /**
      * Get Current Quote
@@ -153,7 +79,7 @@ public class RandomQuotesWidget extends AppWidgetProvider
         Log.i(LOG_TAG, "getCurrentQuote"); 
         
         // Create our stored preferences object
-        PreferencesStorage storedPreferences = new PreferencesStorage(appWidgetId, context);
+        PreferencesStorage storedPreferences = new PreferencesStorage(context, appWidgetId);
         
         // get our current data if available.
         FilesProcessor filesProcessor = new FilesProcessor(storedPreferences);
@@ -161,6 +87,7 @@ public class RandomQuotesWidget extends AppWidgetProvider
         
         return currentParagraph;
     }
+
 
     /**
      * Update App Widget
@@ -210,6 +137,5 @@ public class RandomQuotesWidget extends AppWidgetProvider
         remoteViews.setOnClickPendingIntent(R.id.widget_update_textview, updatePendingIntent);
         
         appWidgetManager.updateAppWidget(appWidgetId, remoteViews);
-        
     }
 }

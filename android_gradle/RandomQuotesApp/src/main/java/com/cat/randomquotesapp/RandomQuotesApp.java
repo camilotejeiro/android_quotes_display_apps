@@ -109,7 +109,7 @@ public class RandomQuotesApp extends Activity
         final Context context = RandomQuotesApp.this;
         
         // Create our stored preferences object
-        PreferencesStorage storedPreferences = new PreferencesStorage(APP_UNIQUE_INSTANCE_ID, context);
+        PreferencesStorage storedPreferences = new PreferencesStorage(context, APP_UNIQUE_INSTANCE_ID);
         
         // get our current data if available.
         FilesProcessor filesProcessor = new FilesProcessor(storedPreferences);

@@ -35,12 +35,12 @@ public class PreferencesStorage
      * @param myAppInstanceId
      * @param myContext
      **/
-    public PreferencesStorage(int myAppInstanceId, Context myContext)
+    public PreferencesStorage(Context myContext, int myAppInstanceId)
     {
         // initialize our class properties, we need specific parameters 
         // for every instance.
-        appInstanceId = myAppInstanceId;
         context = myContext;
+        appInstanceId = myAppInstanceId;
     }
     
     /**
@@ -137,7 +137,7 @@ public class PreferencesStorage
      * Get our current quote and quote-info, then update our index for next 
      * time.
      * Output data Format:
-     * String[0]:   current quotes array index
+     * String[0]: current quotes array index
      * String[1]: total quotes array length
      * String[2]: quotes array current element.
      * String[3]: filePaths array current element.

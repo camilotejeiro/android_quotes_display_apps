@@ -41,6 +41,7 @@ public class FilesProcessor
      * Check File Paths
      * Take the user-chosen filePaths array and validate them to make 
      * sure we prevent errors later on.
+     * @param filePathsArray array of user-chosen file paths to validate.
      * @return boolean True on validation successful, false otherwise.
      **/
     public boolean checkFilePaths(String[] filePathsArray)
@@ -89,9 +90,15 @@ public class FilesProcessor
         return true;
     }   
     
+    /**
+     * Get Current Paragraph
+     * Fetch the last paragraph and extra-data from the data preferences 
+     * and check to make sure we refresh our preferences if we've reached 
+     * the end of file.
+     * @return String[] Our current paragraph with its extra-data. 
+     **/    
     public String[] getCurrentParagraph()
     {      
-          
         String[] currentDataArray = storedPreferences.getCurrentDataPreferences();
 
         // check to see if we've reached the end then we need to re-process our files.

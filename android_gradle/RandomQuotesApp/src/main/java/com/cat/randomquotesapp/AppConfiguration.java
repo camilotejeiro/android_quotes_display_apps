@@ -66,7 +66,7 @@ public class AppConfiguration extends Activity
         String configMessageLog = "";
         
         // create our preferences storage object, pass our app specific properties.
-        final PreferencesStorage storedPreferences = new PreferencesStorage(APP_UNIQUE_INSTANCE_ID, context);
+        final PreferencesStorage storedPreferences = new PreferencesStorage(context, APP_UNIQUE_INSTANCE_ID);
         
         // create our filesProcessor Object, pass our underlying preferences storage. 
         FilesProcessor filesProcessor = new FilesProcessor(storedPreferences);

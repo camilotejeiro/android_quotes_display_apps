@@ -22,7 +22,6 @@ public class AppConfiguration extends Activity
     private static final String LOG_TAG = AppConfiguration.class.getName();
     
     private static final int PICKFILE_REQUEST_CODE = 1;
-    private static final int PICKFILE_SUCCESS_RESULT_CODE = 1;
                 
     // view objects.
     private EditText fileEditText;
@@ -30,13 +29,14 @@ public class AppConfiguration extends Activity
                 
     // declare and reset our AppwidgetID.
     private int myAppWidgetId = AppWidgetManager.INVALID_APPWIDGET_ID;
-                
+    
+    // when the activity is created.
     @Override
     protected void onCreate (Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
         
-        Log.i(LOG_TAG, "Configuration Screen loaded");
+        Log.i(LOG_TAG, "onCreate: Configuration Screen loaded");
         
         // Set the result to CANCELED.  This will cause the widget host to cancel
         // out of the widget placement if they press the back button.
@@ -75,7 +75,7 @@ public class AppConfiguration extends Activity
      **/
     public void saveUserConfiguration(View view) 
     {
-        Log.i(LOG_TAG, "onClick: Save App configuration");
+        Log.i(LOG_TAG, "onClick: SaveUserConfiguration");
         
         final Context context = AppConfiguration.this;
         
@@ -86,7 +86,7 @@ public class AppConfiguration extends Activity
         String configMessageLog = "";
         
         // create our preferences storage object, pass our widget specific properties.
-        PreferencesStorage storedPreferences = new PreferencesStorage(myAppWidgetId, context);
+        PreferencesStorage storedPreferences = new PreferencesStorage(context, myAppWidgetId);
         
         // create our filesProcessor Object, pass our underlying preferences storage. 
         FilesProcessor filesProcessor = new FilesProcessor(storedPreferences);
@@ -168,7 +168,7 @@ public class AppConfiguration extends Activity
      **/    
     public void browseFileDirectories(View view) 
     {
-        Log.i(LOG_TAG, "onClick: browse file directories");
+        Log.i(LOG_TAG, "onClick: browseFileDirectories");
         
         // We will use this var for displaying our results
         String configMessageLog = "";
@@ -178,11 +178,12 @@ public class AppConfiguration extends Activity
         
         try 
         {
-            startActivityForResult(fileintent, PICKFILE_SUCCESS_RESULT_CODE);
+            startActivityForResult(fileintent, PICKFILE_REQUEST_CODE);
         } 
         catch (ActivityNotFoundException e) 
         {            
-            configMessageLog = "No 3rd party file explorer application found";
+            configMessageLog = "No 3rd party file explorer application found, " 
+                + "please install one to use the browse functionality";
             Log.d(LOG_TAG, configMessageLog);
             logEditText.setText("* " + configMessageLog + "\n"); 
         }
@@ -193,8 +194,8 @@ public class AppConfiguration extends Activity
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) 
     {
-        Log.d(LOG_TAG, "onActivityResult"); 
-        Log.d(LOG_TAG, "Request code: " + requestCode + ", Result Code: " + resultCode);
+        Log.i(LOG_TAG, "onActivityResult, Request code: " + requestCode 
+            + ", Result Code: " + resultCode);
         
         // check to make sure we received data.
         if (data == null || data.getData() == null)
