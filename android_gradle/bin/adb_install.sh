@@ -9,19 +9,19 @@ source application_properties.sh
 # ---
 # Uninstall Prior versions of Application (just in case).
 # ---
-echo "* Uninstalling the $package_name App *"
+echo "* Uninstalling the $app_package_name App *"
 echo ""
-echo "adb uninstall $package_name"
+echo "adb uninstall $app_package_name"
 echo ""
 
-adb uninstall $package_name
+adb uninstall $app_package_name
 
 # ---
 # Install Application (debup release).
 # ---
 echo "* Installing the $application_name App *"
 echo ""
-echo "adb install ../$application_name/build/outputs/apk/$application_name-$release_mode.apk"
+echo "adb install ../RandomQuotes/$application_name/build/outputs/apk/$application_name-$release_mode.apk"
 echo ""
 
-adb install "../$application_name/build/outputs/apk/$application_name-$release_mode.apk"
+adb install "../RandomQuotes/$application_name/build/outputs/apk/$application_name-$release_mode.apk"

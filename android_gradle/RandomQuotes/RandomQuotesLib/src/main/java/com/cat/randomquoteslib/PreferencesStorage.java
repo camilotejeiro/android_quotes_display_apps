@@ -1,5 +1,7 @@
 package com.cat.randomquoteslib;
 
+import java.io.File;
+
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.util.Log;
@@ -215,6 +217,12 @@ public class PreferencesStorage
 
         // Commit the edits!
         configurationEditor.commit();
+        
+        // now we want to actually delete the file (clear just empties it)
+        File file= new File(context.getFilesDir().getParent() 
+            + File.separator + QUOTES_USER_CONF_FILE + "_" + appInstanceId);
+        file.delete();
+        
     }
     
     /**
@@ -229,7 +237,12 @@ public class PreferencesStorage
         configurationEditor.clear();
 
         // Commit the edits!
-        configurationEditor.commit();        
+        configurationEditor.commit();
+        
+        // now we want to actually delete the file (clear just empties it)
+        File file= new File(context.getFilesDir().getParent() 
+            + File.separator + QUOTES_DATA_FILE + "_" + appInstanceId);
+        file.delete();
     }
     
     /**

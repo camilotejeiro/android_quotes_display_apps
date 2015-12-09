@@ -26,7 +26,7 @@ at periodic intervals (every hour, every day ...etc).
 
 #### A personal reminder.
 She would like to keep her notes in her cell-phone and display a new quote 
-on Tap or at periodic Intervals. She install the Random Quotes Widget to 
+on Tap or at periodic Intervals. She installs the Random Quotes Widget to 
 display a random quote in her phone home screen at periodic intervals. 
 
 ----
@@ -48,12 +48,15 @@ display a random quote in her phone home screen at periodic intervals.
     > Done.
 
 * Widget Support time update.
+    > Done.
 
 * Utilization of re-usable common library.
+    > Done.
 
 #### Random Quotes Library.
 
 * Creation of re-usable common library for to both the widget and application.
+    > Done.
 
 #### Random Quotes Application.
 
@@ -70,3 +73,4 @@ display a random quote in her phone home screen at periodic intervals.
     > Done.
 
 * Utilization of re-usable common library.
+    > Done.

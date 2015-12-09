@@ -19,7 +19,7 @@ classes_array_length=${#package_classes[@]}
 # to debug
 for ((index=0; index<classes_array_length; index++))
 do
-    log_tag[log_filter_index]="$package_name.${package_classes[index]}"
+    log_tag[log_filter_index]="${package_classes[index]}"
     log_priority[log_filter_index++]='D'
 done
 

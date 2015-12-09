@@ -47,9 +47,10 @@ public class RandomQuotesApp extends Activity
     // called when our activity is created.
     @Override
     protected void onCreate( Bundle savedInstanceState )
-    {
+    {      
+        // when "creating": Call super on create first (prevents nullPointers).
         super.onCreate(savedInstanceState);
-        
+         
         Log.i(LOG_TAG, "onCreate");        
         
         setContentView(R.layout.app_layout);
@@ -91,13 +92,14 @@ public class RandomQuotesApp extends Activity
     // called when our app is closed.
     @Override
     protected void onDestroy()
-    {  
-        super.onDestroy();
-        
+    {          
         Log.i(LOG_TAG, "onDestroy"); 
         
         Log.d(LOG_TAG, "Disabling periodic updates"); 
         periodicUpdatesHandler.removeCallbacks(periodicUpdatesRunnable);
+    
+        // When "destroying": call super onDestroy last (prevents nullPointers).
+        super.onDestroy();
     }
 
     /**

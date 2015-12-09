@@ -35,9 +35,10 @@ public class AppConfiguration extends Activity
                 
     @Override
     protected void onCreate (Bundle savedInstanceState)
-    {
+    {   
+        // when "creating": Call super on create first (prevents nullPointers).
         super.onCreate(savedInstanceState);
-        
+             
         Log.i(LOG_TAG, "onCreate");  
         
         // now we will render the UI for the configure Activity.
@@ -48,7 +49,7 @@ public class AppConfiguration extends Activity
         
         // Where we will display messages regarding configuration details.
         logEditText = (EditText) findViewById(R.id.config_log_edittext);
-
+    
     }
     
     /**

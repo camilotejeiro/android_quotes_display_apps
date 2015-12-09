@@ -1,6 +1,7 @@
 package com.cat.randomquoteswidget;
 
 import android.app.PendingIntent;
+import android.app.ActivityManager;
 import android.appwidget.AppWidgetManager;
 import android.appwidget.AppWidgetProvider;
 import android.content.Context;
@@ -26,7 +27,10 @@ public class RandomQuotesWidget extends AppWidgetProvider
     // called for periodic or onTap updates.
     @Override 
     public void onUpdate (Context context, AppWidgetManager appWidgetManager, int[] appWidgetIds)
-    {
+    {    
+        // when "creating": Call super onUpdate first (prevents nullPointers).
+        super.onUpdate(context, appWidgetManager, appWidgetIds);
+            
         // push updates to every applicable widget instance.
         for (int i = 0; i < appWidgetIds.length; i++)
         {
@@ -57,7 +61,7 @@ public class RandomQuotesWidget extends AppWidgetProvider
     // called when a widget instance is removed from the screen.
     @Override
     public void onDeleted (Context context, int[] appWidgetIds)
-    {
+    {        
         // clean up all resources for every applicable widget instance.
         for (int i = 0; i < appWidgetIds.length; i++)
         {
@@ -68,7 +72,27 @@ public class RandomQuotesWidget extends AppWidgetProvider
             
             storedPreferences.deleteAllPreferences();
         }
+        
+        // When "destroying" call super onDeleted last (prevents nullPointers).
+        super.onDeleted(context, appWidgetIds);
     }
+    
+    // called when we have no more remaining widget instances.
+    @Override
+    public void onDisabled (Context context)
+    {        
+        Log.i(LOG_TAG, "onDisabled: Deleting all user data, everything");
+        
+        // here we want to remove every single bit of data we created, 
+        // basically get the widget app back to install state.
+        ((ActivityManager)context.getSystemService(Context.ACTIVITY_SERVICE))
+            .clearApplicationUserData();
+            
+        // When "destroying" call super onDisabled last (prevents nullPointers).
+        super.onDisabled(context);
+            
+    }
+        
 
     /**
      * Get Current Quote

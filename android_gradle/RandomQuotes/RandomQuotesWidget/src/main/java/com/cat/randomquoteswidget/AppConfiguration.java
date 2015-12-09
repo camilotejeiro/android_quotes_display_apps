@@ -38,6 +38,7 @@ public class AppConfiguration extends Activity
     @Override
     protected void onCreate (Bundle savedInstanceState)
     {
+        // when "creating": Call super onCreate first (prevents nullPointers).
         super.onCreate(savedInstanceState);
         
         Log.i(LOG_TAG, "onCreate: Configuration Screen loaded");
