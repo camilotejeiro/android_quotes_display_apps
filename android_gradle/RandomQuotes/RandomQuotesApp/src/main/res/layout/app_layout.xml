@@ -7,46 +7,50 @@
         android:background="#C6C6C6">
         
         <TextView
-            android:id="@+id/file_name"
+            android:id="@+id/app_file_name_textview"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
             android:gravity="center"
+            android:text="@string/app_file_name_textview"
             android:textSize="14sp"
             android:textColor="#a6a6a6"
             android:clickable="true"
             android:onClick="launchAppConfiguration">
         </TextView> 
         <TextView
-            android:id="@+id/update"
+            android:id="@+id/app_update_textview"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
             android:gravity="center"
+            android:text="@string/app_update_textview"
             android:textSize="23sp"
             android:textColor="#000000" 
             android:clickable="true"
             android:onClick="onTapNextQuote">
         </TextView> 
         <TextView
-            android:id="@+id/line_number"
+            android:id="@+id/app_line_number_textview"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
             android:layout_alignParentBottom="true"
             android:gravity="center"
+            android:text="@string/app_line_number_textview"            
             android:textSize="14sp"
             android:textColor="#a6a6a6"
             android:clickable="true"
             android:onClick="launchAppConfiguration">
         </TextView> 
         <TextView
-            android:id="@+id/quotes_index"
+            android:id="@+id/app_queue_number_textview"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
             android:layout_alignParentBottom="true"
             android:gravity="center"
+            android:text="@string/app_queue_number_textview" 
             android:textSize="14sp"
             android:textColor="#a6a6a6"
             android:clickable="true"

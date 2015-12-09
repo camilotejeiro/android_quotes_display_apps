@@ -24,8 +24,8 @@ local.properties
 
 
 # gradle specific ignores.
-.gradle/
-*generated/
-*intermediates/
-*tmp/
-*logs/
+.gradle
+*generated
+*intermediates
+*tmp
+*logs

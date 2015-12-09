@@ -44,10 +44,10 @@ public class AppConfiguration extends Activity
         setContentView(R.layout.configure_layout);
 
         // we will have a file name input that can be configured.
-        fileEditText = (EditText) findViewById(R.id.file_edit_text);
+        fileEditText = (EditText) findViewById(R.id.config_files_edittext);
         
         // Where we will display messages regarding configuration details.
-        logEditText = (EditText) findViewById(R.id.log_edit_text);
+        logEditText = (EditText) findViewById(R.id.config_log_edittext);
 
     }
     

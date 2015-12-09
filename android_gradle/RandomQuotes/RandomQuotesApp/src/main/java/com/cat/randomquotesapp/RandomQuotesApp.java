@@ -30,8 +30,8 @@ public class RandomQuotesApp extends Activity
     // our app configuration activity request code.
     private static final int APP_CONFIG_REQUEST_CODE = 2;
     
-    // update every 1 hour (600000 mS)
-    private static final int APP_UPDATE_PERIOD = 10000; 
+    // update every 1 hour (3600000 mS)
+    private static final int APP_UPDATE_PERIOD = 3600000; 
     
     // our views.
     private static TextView fileNameView;
@@ -55,10 +55,10 @@ public class RandomQuotesApp extends Activity
         setContentView(R.layout.app_layout);
         
         // get a handle of our view objects.
-        fileNameView = (TextView) findViewById(R.id.file_name);        
-        updateView = (TextView) findViewById(R.id.update);  
-        lineNumberView = (TextView) findViewById(R.id.line_number); 
-        quotesIndexView = (TextView) findViewById(R.id.quotes_index); 
+        fileNameView = (TextView) findViewById(R.id.app_file_name_textview);        
+        updateView = (TextView) findViewById(R.id.app_update_textview);  
+        lineNumberView = (TextView) findViewById(R.id.app_line_number_textview); 
+        quotesIndexView = (TextView) findViewById(R.id.app_queue_number_textview); 
         
         // create the handler we will use to execute our runnable at periodic 
         // intervals.
