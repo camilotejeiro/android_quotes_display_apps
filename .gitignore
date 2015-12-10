@@ -36,8 +36,8 @@
 # Whitelist (allow exceptions)
 # ---
 
-# Allow release signed .apks
-!*-release.apk
-
-# even if they are in subdirectories
+# support allows even if they are in subdirectories
 !*/
+
+# Allow release signed .apks.
+!*-release.apk
