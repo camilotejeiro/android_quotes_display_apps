@@ -1,8 +1,10 @@
 # ======================================================================
 # Standard .gitignore for quotes display android projects
-# Git .gitignore file, this tells git what to ignore and what to 
-# allow to be included in the repo
 # ======================================================================
+
+# ---
+# Blacklist (ignores)
+# ---
 
 # Ignore any static reference-only projects.
 *-v*
@@ -16,16 +18,23 @@
 # Ignore any android eclipse legacy projects.
 *android_eclipse_ant/
 
-#ignore any private keystore files.
+# Ignore any private keystore files.
 *.jks
 
-# Local configuration file (sdk path, etc)
-local.properties
-
-
 # gradle specific ignores.
-.gradle
-*generated
-*intermediates
-*tmp
-*logs
+
+# ignore gradle props.
+*.gradle/
+
+# ignore gradle build dir.
+*build/
+
+# Ignore Local configuration file in any dir (sdk path, etc)
+*local.properties
+
+# ---
+# Whitelist (allow exceptions)
+# ---
+
+# Allow release signed .apks
+*-release.apk
