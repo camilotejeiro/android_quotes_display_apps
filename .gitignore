@@ -10,13 +10,13 @@
 *-v*
 
 # Ignore any project personal notes
-*notes/
+*notes/*
 
 # Ignore the android studio legacy projects.
-*android_studio_gradle/
+*android_studio_gradle/*
 
 # Ignore any android eclipse legacy projects.
-*android_eclipse_ant/
+*android_eclipse_ant/*
 
 # Ignore any private keystore files.
 *.jks
@@ -24,10 +24,10 @@
 # gradle specific ignores.
 
 # ignore gradle props.
-*.gradle/
+*.gradle/*
 
 # ignore gradle build dir.
-*build/
+*build/*
 
 # Ignore Local configuration file in any dir (sdk path, etc)
 *local.properties
