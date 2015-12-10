@@ -17,12 +17,24 @@ android
     compileSdkVersion 'android-19'
     buildToolsVersion '23.0.0'
 
+    signingConfigs
+    {
+        release
+        {
+            storeFile file("../../../android_keystore.jks")
+            storePassword System.console().readLine("\nKeystore Password: ")
+            keyAlias "c.a.t"
+            keyPassword System.console().readLine("\nKey password: ")            
+        }
+    }
+
     buildTypes 
     {
         release 
         {
             minifyEnabled false
             proguardFile getDefaultProguardFile('proguard-android.txt')
+            signingConfig signingConfigs.release
         }
     }
 }
