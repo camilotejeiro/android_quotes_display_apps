@@ -37,4 +37,7 @@
 # ---
 
 # Allow release signed .apks
-!*/*-release.apk
+!*-release.apk
+
+# even if they are in subdirectories
+!*/
