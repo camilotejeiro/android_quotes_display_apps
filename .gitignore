@@ -36,8 +36,6 @@
 # Whitelist (allow exceptions)
 # ---
 
-# support allows even if they are in subdirectories
-!*/
-
-# Allow release signed .apks.
-!*-release.apk
+# Allow specific release signed .apks.
+android_gradle/RandomQuotes/RandomQuotesApp/build/outputs/apk/*-release.apk
+android_gradle/RandomQuotes/RandomQuotesWidget/build/outputs/apk/*-release.apk
