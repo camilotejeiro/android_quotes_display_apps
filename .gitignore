@@ -37,4 +37,4 @@
 # ---
 
 # Allow release signed .apks
-*-release.apk
+!*-release.apk
