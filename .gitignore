@@ -26,16 +26,11 @@
 # ignore gradle props.
 *.gradle/
 
-# ignore gradle build dir.
-*build/
+# ignore gradle build directories.
+*generated/
+*intermediates/
+*tmp/
+*logs/
 
 # Ignore Local configuration file in any dir (sdk path, etc)
 *local.properties
-
-# ---
-# Whitelist (allow exceptions)
-# ---
-
-# Allow specific release signed .apks.
-!android_gradle/RandomQuotes/RandomQuotesApp/build/outputs/apk/*-release.apk
-!android_gradle/RandomQuotes/RandomQuotesWidget/build/outputs/apk/*-release.apk
