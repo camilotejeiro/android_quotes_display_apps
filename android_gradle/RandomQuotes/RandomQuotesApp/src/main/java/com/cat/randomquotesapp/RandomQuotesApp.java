@@ -5,10 +5,14 @@ import android.app.PendingIntent;
 import android.content.Context;
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.PowerManager;
+import android.os.PowerManager.WakeLock;
 import android.content.Intent;
 import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
+
+import java.util.Calendar;
 
 // import our shared common library classes.
 import com.cat.randomquoteslib.PreferencesStorage;
@@ -30,19 +34,27 @@ public class RandomQuotesApp extends Activity
     // our app configuration activity request code.
     private static final int APP_CONFIG_REQUEST_CODE = 2;
     
+    // constants to define our daytime to keep the device display ON.
+    private static final int DAYTIME_START_HOUR = 7;
+    private static final int DAYTIME_END_HOUR = 19;
+    
     // update every 1 hour (3600000 mS)
     private static final int APP_UPDATE_PERIOD = 3600000; 
-    
+
     // our views.
     private static TextView fileNameView;
     private static TextView updateView;
     private static TextView lineNumberView;
     private static TextView quotesIndexView;
     
-    private boolean periodicUpdates = false;
-    
-    
+    // handler for our periodic updates.
     private Handler periodicUpdatesHandler;
+    
+    // wake lock to keep the device on as a picture frame as necessary.
+    private WakeLock wakeLock;
+    
+    // calendar for getting time of day (to wake up frame at AM and sleep at PM)
+    private Calendar calendar;
     
     // called when our activity is created.
     @Override
@@ -52,6 +64,10 @@ public class RandomQuotesApp extends Activity
         super.onCreate(savedInstanceState);
          
         Log.i(LOG_TAG, "onCreate");        
+        
+        // instantiating our wakelock.
+        PowerManager powerManager = (PowerManager) getSystemService(Context.POWER_SERVICE);
+        wakeLock = powerManager.newWakeLock(PowerManager.FULL_WAKE_LOCK, "Picture Frame Device Wake Lock");
         
         setContentView(R.layout.app_layout);
         
@@ -64,7 +80,6 @@ public class RandomQuotesApp extends Activity
         // create the handler we will use to execute our runnable at periodic 
         // intervals.
         periodicUpdatesHandler = new Handler();
-
 
         String [] currentQuote = getCurrentQuote();
 
@@ -80,13 +95,17 @@ public class RandomQuotesApp extends Activity
         else
         {     
             Log.d(LOG_TAG, "Found prior stored data preferences");
-                   
+            
+            // handle wakelock depending on time of day.
+            handleWakeLock(checkDaytime());
+            
             // update the app with our current quote.
             updateAppView(currentQuote); 
         
-            // schedule periodic updates, we have valid data. 
-            periodicUpdatesRunnable.run();
+            // Schedule our runnable to handle periodic updates from now on.
+            periodicUpdatesHandler.postDelayed(periodicUpdatesRunnable, APP_UPDATE_PERIOD);
         }
+        
     }
     
     // called when our app is closed.
@@ -94,6 +113,12 @@ public class RandomQuotesApp extends Activity
     protected void onDestroy()
     {          
         Log.i(LOG_TAG, "onDestroy"); 
+    
+        Log.d(LOG_TAG, "Releasing full wakelock");     
+        
+        // release wake lock if necessary.
+        if (wakeLock.isHeld() == true)
+            wakeLock.release();
         
         Log.d(LOG_TAG, "Disabling periodic updates"); 
         periodicUpdatesHandler.removeCallbacks(periodicUpdatesRunnable);
@@ -153,6 +178,7 @@ public class RandomQuotesApp extends Activity
         final Context context = RandomQuotesApp.this;
         
         Log.d(LOG_TAG, "Disabling periodic updates"); 
+        
         // disable any timedSchedule tasks if any.
         periodicUpdatesHandler.removeCallbacks(periodicUpdatesRunnable);
         
@@ -174,6 +200,15 @@ public class RandomQuotesApp extends Activity
         {
             Log.d(LOG_TAG, "periodicUdatesRunnable: Scheduling periodic updates");
             
+            // handle wakelock depending on time of day.
+            handleWakeLock(checkDaytime());
+
+            // get our first quote.
+            String [] currentQuote = getCurrentQuote();
+
+            // update the app with our current quote.
+            updateAppView(currentQuote); 
+            
             // Schedule our runnable to handle periodic updates from now on.
             periodicUpdatesHandler.postDelayed(periodicUpdatesRunnable, APP_UPDATE_PERIOD);
         }
@@ -192,15 +227,66 @@ public class RandomQuotesApp extends Activity
         {
             Log.i(LOG_TAG, "periodicUdatesRunnable: Executing periodic update");
             
-            String [] currentQuote = getCurrentQuote(); 
+            // check to see if it is daytime.
+            boolean daytime = checkDaytime();
             
-            // update the app with our current quote.
-            updateAppView(currentQuote);             
+            // acquire or release wakelock as applicable.
+            handleWakeLock(daytime);
+            
+            // only update quotes if on daytime (otherwise is futile)
+            if (daytime == true)
+            {
+                String [] currentQuote = getCurrentQuote(); 
+                
+                // update the app with our current quote.
+                updateAppView(currentQuote);  
+            }
             
             // re schedule the runnable for our next update.           
             periodicUpdatesHandler.postDelayed(periodicUpdatesRunnable, APP_UPDATE_PERIOD);
         }
     };
+    
+    
+    /**
+     * Check Day Time
+     * Method called for client code to know whether is day time.
+     * @return boolean The flag indicating whether is daytime or not.
+     **/
+    private boolean checkDaytime()
+    {
+        int hourOfDay = Calendar.getInstance().get(Calendar.HOUR_OF_DAY);
+        
+        Log.i(LOG_TAG, "checkDayTime, current time (24hr): " + hourOfDay);
+        
+        if ((hourOfDay >= DAYTIME_START_HOUR) && (hourOfDay < DAYTIME_END_HOUR))
+            return true;
+        else
+            return false;
+    }
+
+    /**
+     * Handle Wake Lock
+     * Method called to acquire or release WakeLock based on time of day.
+     * @param dayTime The flag indicating whether is daytime or not.
+     **/    
+    private void handleWakeLock(boolean dayTime)
+    {
+        Log.i(LOG_TAG, "handleWakeLock, daytime: " + dayTime);
+        
+        if (dayTime == true)
+        {
+            // acquire wakelock to keep screen ON if necessary.
+            if (wakeLock.isHeld() == false)
+                wakeLock.acquire();                
+        }
+        else
+        {
+            // release wakelock to let phone go to sleep as necessary.
+            if (wakeLock.isHeld() == true)
+                wakeLock.release();
+        }
+    }
     
     /**
      * Update App View

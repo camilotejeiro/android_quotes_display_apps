@@ -22,9 +22,9 @@ android
         release
         {
             storeFile file("../../../android_keystore.jks")
-            storePassword System.console().readLine("\nKeystore Password: ")
+            storePassword System.getenv("ANDROID_KEYSTORE_PASSWORD")
             keyAlias "c.a.t"
-            keyPassword System.console().readLine("\nKey password: ")            
+            keyPassword System.getenv("ANDROID_KEYSTORE_KEY")
         }
     }
 

@@ -125,11 +125,7 @@ public class AppConfiguration extends Activity
 
         // it is the responsibility of the Activity to update the App 
         // the first time when the configuration is complete.
-        
-        String [] currentDataArray = filesProcessor.getCurrentParagraph();  
-        // update the app with our current quote.
-        RandomQuotesApp.updateAppView(currentDataArray);
-        
+        // this will be done upon receiving a configuration result.
         setResult(RESULT_OK);
         
         // end the activity.

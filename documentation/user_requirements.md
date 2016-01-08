@@ -74,3 +74,6 @@ display a random quote in her phone home screen at periodic intervals.
 
 * Utilization of re-usable common library.
     > Done.
+    
+* Display device awake on daytime, sleep on nightime. 
+    > Done.
