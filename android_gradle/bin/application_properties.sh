@@ -4,15 +4,15 @@
 # ======================================================================
 
 # Android Application name
-application_name='RandomQuotesWidget'
+application_name='RandomQuotesApp'
 
 # Android app package name
-app_package_name='com.cat.randomquoteswidget'
+app_package_name='com.cat.randomquotesapp'
 
 lib_package_name='com.cat.randomquoteslib'
 
 # android application package classes.
-package_classes[0]="$app_package_name.RandomQuotesWidget"
+package_classes[0]="$app_package_name.RandomQuotesApp"
 package_classes[1]="$app_package_name.AppConfiguration"
 
 # android library package classes.

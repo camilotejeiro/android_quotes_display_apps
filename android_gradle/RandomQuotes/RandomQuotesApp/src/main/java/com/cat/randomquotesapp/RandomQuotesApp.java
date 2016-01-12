@@ -1,6 +1,8 @@
 package com.cat.randomquotesapp;
 
 import android.app.Activity;
+import android.app.KeyguardManager;
+import android.app.KeyguardManager.KeyguardLock;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.os.Bundle;
@@ -40,7 +42,7 @@ public class RandomQuotesApp extends Activity
     
     // update every 1 hour (3600000 mS)
     private static final int APP_UPDATE_PERIOD = 3600000; 
-
+    
     // our views.
     private static TextView fileNameView;
     private static TextView updateView;
@@ -53,6 +55,8 @@ public class RandomQuotesApp extends Activity
     // wake lock to keep the device on as a picture frame as necessary.
     private WakeLock wakeLock;
     
+    private KeyguardLock keyguardLock;
+    
     // calendar for getting time of day (to wake up frame at AM and sleep at PM)
     private Calendar calendar;
     
@@ -64,10 +68,19 @@ public class RandomQuotesApp extends Activity
         super.onCreate(savedInstanceState);
          
         Log.i(LOG_TAG, "onCreate");        
+
+        // instantiating our keyguardlock.
+        KeyguardManager keyguardManager = (KeyguardManager) getSystemService(Context.KEYGUARD_SERVICE); 
+        keyguardLock = keyguardManager.newKeyguardLock("Picture Frame Keyguard Lock"); 
+        
+        // make sure the keyguardLock is disabled when this app is active.
+        keyguardLock.disableKeyguard(); 
         
         // instantiating our wakelock.
         PowerManager powerManager = (PowerManager) getSystemService(Context.POWER_SERVICE);
-        wakeLock = powerManager.newWakeLock(PowerManager.FULL_WAKE_LOCK, "Picture Frame Device Wake Lock");
+        wakeLock = powerManager.newWakeLock(
+            PowerManager.SCREEN_BRIGHT_WAKE_LOCK | PowerManager.ACQUIRE_CAUSES_WAKEUP, 
+            "Picture Frame Device Wake Lock");
         
         setContentView(R.layout.app_layout);
         
@@ -119,6 +132,9 @@ public class RandomQuotesApp extends Activity
         // release wake lock if necessary.
         if (wakeLock.isHeld() == true)
             wakeLock.release();
+        
+        // activate lock screen after app is done.
+        keyguardLock.reenableKeyguard(); 
         
         Log.d(LOG_TAG, "Disabling periodic updates"); 
         periodicUpdatesHandler.removeCallbacks(periodicUpdatesRunnable);
