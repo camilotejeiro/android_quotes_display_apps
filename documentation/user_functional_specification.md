@@ -61,8 +61,7 @@ display a random quote in her phone home screen at periodic intervals.
 
 ### Random Quotes Library.
 
-* Creation of re-usable common library for to both the widget and 
-    application.  
+* Creation of re-usable common library for to both the widget and application.  
     > Done.
 
 ### Random Quotes Application.
