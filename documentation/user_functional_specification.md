@@ -1,7 +1,8 @@
-Quotes Display Apps Functional Specification
-============================================
+Quotes Display Apps Functional Specification V2.1
+=================================================
 
 ## Project Goal
+---
 
 Develop two applications: One simple application for picture frames (e.g. 
 old android devices) and one widget application for cell-phones. The 
@@ -12,6 +13,7 @@ intervals an UI element can read the next quote from the processed text
 file and update the view.
 
 ## Use Cases.
+---
 
 A person has a text file with some paragraphs(quotes) or notes he/she has 
 made (life quotes, book summaries ...etc).
@@ -30,62 +32,41 @@ on Tap or at periodic Intervals. She installs the Random Quotes Widget to
 display a random quote in her phone home screen at periodic intervals. 
 
 
-## Features and  Requirements.
+## Features
+---
 
 ### Random Quotes Widget
 
-* Support for multiple instances  
-    > Done
+* F-droid ready.
+    Support for f-droid downloads.
 
-* Support for multiple files per application instance  
-    > Done
-
-* User view displays source and processed file information  
-    > Done
-
-* Configuration screen supports native file browser (if existent)  
-     > Done
-
-* Widget Support time update:  
-    > Done
-
-* Utilization of re-usable common library: 
-    > Done
-
-* Scan for book summaries in the configuration screen.  
-    So that you dont have to select file by file.
+* Scan Directories.
+    Support for scanning diretories and populating the book summaries list, 
+    so that you dont have to select file by file.
     
-* Scan automatically (if enabled) after last quote is read from cache.  
-    So that it picks up any new summary in the directory without need 
-    for relaunching the configuration screen.
+* Open Settings from widget. 
+    Support for opening app settings from the widget display view. 
+    Bottom left corner.
 
 ### Random Quotes Library.
 
-* Creation of re-usable common library for to both the widget and application.  
-    > Done.  
 
 ### Random Quotes Application.
 
-* Application Supports multiple files  
-    > Done.
+* F-droid ready.
+    Support for f-droid downloads.
 
-* Application view displays source and processed file information  
-    > Done.
-
-* Configuration screen supports native file browser (if existent)  
-    > Done.
+* Scan Directories.
+    Support for scanning diretories and populating the book summaries list, 
+    so that you dont have to select file by file.
     
-* Application support timed update  
-    > Done.
+* Open Settings from widget. 
+    Support for opening app settings from the widget display view.
+    Bottom left corner.
 
-* Utilization of re-usable common library  
-    > Done.
-    
-* Display device awake on daytime, sleep on nightime  
-    > Done.
 
-* Scan for book summaries in the configuration screen  
-    
-* Scan automatically (if enabled) after last quote is read from processed file  
-    So that it picks up any new summary in the directory without need 
-    for relaunching the configuration screen.
+## Posponed/Removed Features.
+---
+
+* Open text file directly from view. (V2.2)
+ 
