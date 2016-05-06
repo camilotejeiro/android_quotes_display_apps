@@ -37,36 +37,36 @@ display a random quote in her phone home screen at periodic intervals.
 
 ### Random Quotes Widget
 
-* F-droid ready.
-    Support for f-droid downloads.
+* Change project Ownership.
+    org.osohm ...
 
 * Scan Directories.
     Support for scanning diretories and populating the book summaries list, 
     so that you dont have to select file by file.
-    
-* Open Settings from widget. 
-    Support for opening app settings from the widget display view. 
-    Bottom left corner.
 
 ### Random Quotes Library.
 
 
 ### Random Quotes Application.
 
-* F-droid ready.
-    Support for f-droid downloads.
+* Change project Ownership.
+    org.osohm ...
 
 * Scan Directories.
     Support for scanning diretories and populating the book summaries list, 
     so that you dont have to select file by file.
-    
-* Open Settings from widget. 
-    Support for opening app settings from the widget display view.
-    Bottom left corner.
 
-
-## Posponed/Removed Features.
+## Posponed Features.
 ---
 
-* Open text file directly from view. (V2.2)
+* Open Settings from widget (v2.2). 
+    Support for opening app settings from the widget display view. 
+    Bottom left corner.
+
+* Open text file directly from view. (v2.3)
  
+* Put app in f-droid (removed)
+    Their instructions are terribly outdated. Had to troubleshoot 
+    all their commands and in the end it didn't work, spent a day 
+    on this, let's not do it again.
+    
