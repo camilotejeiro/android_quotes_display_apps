@@ -1,4 +1,4 @@
-package com.cat.randomquoteslib;
+package org.osohm.randomquoteslib;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -16,7 +16,7 @@ import android.util.Log;
  * Files Processor
  * This class is a library which provides all of the necessary text 
  * files manipulation routines. 
- * @author C.A.T    ,=,e
+ * @author Camilo Tejeiro ,=,e for Osohm
  **********************************************************************/
 public class FilesProcessor
 {

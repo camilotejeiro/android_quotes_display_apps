@@ -1,4 +1,4 @@
-package com.cat.randomquoteswidget;
+package org.osohm.randomquoteswidget;
 
 import android.app.PendingIntent;
 import android.app.ActivityManager;
@@ -11,14 +11,14 @@ import android.util.Log;
 import android.widget.RemoteViews;
 
 // import our shared common library classes.
-import com.cat.randomquoteslib.PreferencesStorage;
-import com.cat.randomquoteslib.FilesProcessor;
+import org.osohm.randomquoteslib.PreferencesStorage;
+import org.osohm.randomquoteslib.FilesProcessor;
 
 /***********************************************************************
  * Random Quotes Widget.
  * Simply takes a text file(s) or multiple text files and displays them 
  * in random order in a widget view.
- * @author C.A.T    ,=,e
+ * @author Camilo Tejeiro ,=,e for Osohm
  **********************************************************************/
 public class RandomQuotesWidget extends AppWidgetProvider
 {    

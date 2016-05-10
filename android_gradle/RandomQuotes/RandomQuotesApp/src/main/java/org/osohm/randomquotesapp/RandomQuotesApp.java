@@ -1,4 +1,4 @@
-package com.cat.randomquotesapp;
+package org.osohm.randomquotesapp;
 
 import android.app.Activity;
 import android.app.KeyguardManager;
@@ -17,14 +17,14 @@ import android.widget.TextView;
 import java.util.Calendar;
 
 // import our shared common library classes.
-import com.cat.randomquoteslib.PreferencesStorage;
-import com.cat.randomquoteslib.FilesProcessor;
+import org.osohm.randomquoteslib.PreferencesStorage;
+import org.osohm.randomquoteslib.FilesProcessor;
 
 /***********************************************************************
  * Random Quotes App.
  * Simply takes a text file(s) or multiple text files and displays them 
  * in random order.
- * @author C.A.T    ,=,e
+ * @author Camilo Tejeiro ,=,e for Osohm
  **********************************************************************/
 public class RandomQuotesApp extends Activity
 {    

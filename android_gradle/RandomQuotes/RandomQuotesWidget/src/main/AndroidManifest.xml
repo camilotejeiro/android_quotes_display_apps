@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-      package="com.cat.randomquoteswidget">
+      package="org.osohm.randomquoteswidget">
     
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
@@ -9,7 +9,7 @@
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
         
-        <receiver android:name="com.cat.randomquoteswidget.RandomQuotesWidget" >
+        <receiver android:name="org.osohm.randomquoteswidget.RandomQuotesWidget" >
             <intent-filter >
                 <action 
                     android:name="android.appwidget.action.APPWIDGET_UPDATE" />
@@ -20,7 +20,7 @@
                 android:resource="@xml/widget_info" />
         </receiver>
         
-        <activity android:name="com.cat.randomquoteswidget.AppConfiguration" >
+        <activity android:name="org.osohm.randomquoteswidget.AppConfiguration" >
             <intent-filter>
                 <action android:name="android.appwidget.action.APPWIDGET_CONFIGURE"/>
             </intent-filter>

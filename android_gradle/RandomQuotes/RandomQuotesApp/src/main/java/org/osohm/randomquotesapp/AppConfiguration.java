@@ -1,4 +1,4 @@
-package com.cat.randomquotesapp;
+package org.osohm.randomquotesapp;
 
 import android.app.Activity;
 import android.content.Context;
@@ -10,15 +10,15 @@ import android.view.View;
 import android.widget.EditText;
 
 // import our shared common library classes.
-import com.cat.randomquoteslib.PreferencesStorage;
-import com.cat.randomquoteslib.FilesProcessor;
+import org.osohm.randomquoteslib.PreferencesStorage;
+import org.osohm.randomquoteslib.FilesProcessor;
 
 /***********************************************************************
  * App Configuration
  * This class simply displays a configure screen 
  * where the user can input the text file(s) he wants the app to read 
  * from.
- * @author C.A.T    ,=,e
+ * @author Camilo Tejeiro ,=,e for Osohm
  **********************************************************************/
 public class AppConfiguration extends Activity
 {

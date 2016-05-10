@@ -43,7 +43,9 @@ display a random quote in her phone home screen at periodic intervals.
 * Scan Directories.
     Support for scanning diretories and populating the book summaries list, 
     so that you dont have to select file by file.
-
+    
+* Add menu of different periodic intervals.
+    
 ### Random Quotes Library.
 
 
@@ -52,9 +54,16 @@ display a random quote in her phone home screen at periodic intervals.
 * Change project Ownership.
     org.osohm ...
 
+* Fix deprecated functionality.
+
 * Scan Directories.
     Support for scanning diretories and populating the book summaries list, 
     so that you dont have to select file by file.
+    
+* Select Start & End Time.
+    When the picture frame turns on. When the frame turns off.
+
+* Add menu of different periodic intervals.
 
 ## Posponed Features.
 ---

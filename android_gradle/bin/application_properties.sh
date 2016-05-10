@@ -7,9 +7,9 @@
 application_name='RandomQuotesApp'
 
 # Android app package name
-app_package_name='com.cat.randomquotesapp'
+app_package_name='org.osohm.randomquotesapp'
 
-lib_package_name='com.cat.randomquoteslib'
+lib_package_name='org.osohm.randomquoteslib'
 
 # android application package classes.
 package_classes[0]="$app_package_name.RandomQuotesApp"

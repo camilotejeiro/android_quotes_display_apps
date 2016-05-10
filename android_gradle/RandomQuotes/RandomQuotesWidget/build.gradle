@@ -6,7 +6,7 @@ buildscript
     }
     dependencies 
     {
-        classpath 'com.android.tools.build:gradle:1.5.0'
+        classpath 'com.android.tools.build:gradle:2.1.0'
     }
 }
 
@@ -14,16 +14,24 @@ apply plugin: 'android'
 
 android 
 {
-    compileSdkVersion 'android-19'
-    buildToolsVersion '23.0.0'
+    compileSdkVersion 'android-23'
+    buildToolsVersion '23.0.3'
+
+    defaultConfig 
+    {
+        versionCode 3
+        versionName "2.1"
+        targetSdkVersion 19
+        minSdkVersion 16
+    }
 
     signingConfigs
     {
         release
         {
-            storeFile file("../../../android_keystore.jks")
+            storeFile file("../../../../android_keystore/osohm_android_keystore.jks")
             storePassword System.getenv("ANDROID_KEYSTORE_PASSWORD")
-            keyAlias "c.a.t"
+            keyAlias "osohm"
             keyPassword System.getenv("ANDROID_KEYSTORE_KEY")
         }
     }
@@ -36,7 +44,7 @@ android
             proguardFile getDefaultProguardFile('proguard-android.txt')
             signingConfig signingConfigs.release
         }
-    }  
+    }
 }
  
 dependencies 

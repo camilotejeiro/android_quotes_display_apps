@@ -1,4 +1,4 @@
-package com.cat.randomquoteslib;
+package org.osohm.randomquoteslib;
 
 import java.io.File;
 
@@ -14,7 +14,7 @@ import android.util.Log;
  * our data storage, it was not used because the amount of data we are 
  * handling is quite small and the number of I/Os is tiny. It would have 
  * been an unnecessary feature (perhaps this will change in the future).
- * @author C.A.T    ,=,e
+ * @author Camilo Tejeiro ,=,e for Osohm
  **********************************************************************/
 public class PreferencesStorage
 {
