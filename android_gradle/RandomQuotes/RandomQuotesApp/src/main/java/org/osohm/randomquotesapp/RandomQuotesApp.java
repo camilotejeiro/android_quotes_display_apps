@@ -8,7 +8,6 @@ import android.os.Handler;
 import android.content.Intent;
 import android.util.Log;
 import android.view.View;
-import android.view.Window;
 import android.view.WindowManager;
 import android.widget.TextView;
 
@@ -34,13 +33,6 @@ public class RandomQuotesApp extends Activity
     // our app configuration activity request code.
     private static final int APP_CONFIG_REQUEST_CODE = 2;
     
-    // constants to define our daytime to keep the device display ON.
-    private static final int DAYTIME_START_HOUR = 7;
-    private static final int DAYTIME_END_HOUR = 19;
-    
-    // update every 1 hour (3600000 mS)
-    private static final int APP_UPDATE_PERIOD = 3600000; 
-    
     // our views.
     private static TextView fileNameView;
     private static TextView updateView;
@@ -55,7 +47,7 @@ public class RandomQuotesApp extends Activity
     
     // called when our activity is created.
     @Override
-    protected void onCreate( Bundle savedInstanceState )
+    protected void onCreate(Bundle savedInstanceState)
     {      
         // when "creating": Call super on create first (prevents nullPointers).
         super.onCreate(savedInstanceState);
@@ -99,9 +91,8 @@ public class RandomQuotesApp extends Activity
             
             // update the app with our current quote.
             updateAppView(currentQuote); 
-        
-            // Schedule our runnable to handle periodic updates from now on.
-            periodicUpdatesHandler.postDelayed(periodicUpdatesRunnable, APP_UPDATE_PERIOD);
+            
+            schedulePeriodicUpdates();
         }
         
     }
@@ -201,8 +192,7 @@ public class RandomQuotesApp extends Activity
             // update the app with our current quote.
             updateAppView(currentQuote); 
             
-            // Schedule our runnable to handle periodic updates from now on.
-            periodicUpdatesHandler.postDelayed(periodicUpdatesRunnable, APP_UPDATE_PERIOD);
+            schedulePeriodicUpdates();
         }
         else
         {
@@ -233,11 +223,27 @@ public class RandomQuotesApp extends Activity
                 updateAppView(currentQuote);  
             }
             
-            // re schedule the runnable for our next update.           
-            periodicUpdatesHandler.postDelayed(periodicUpdatesRunnable, APP_UPDATE_PERIOD);
+            // re-schedule our updates.
+            schedulePeriodicUpdates();
         }
     };
     
+    /**
+     * Schedule Periodic Updates
+     * Convenience method for reading the user-desired update period 
+     * and scheduling our updates.
+     **/ 
+    private void schedulePeriodicUpdates()
+    {
+        
+        final Context context = RandomQuotesApp.this;
+        
+        // Create our stored preferences object
+        PreferencesStorage storedPreferences = new PreferencesStorage(context, APP_UNIQUE_INSTANCE_ID);
+        
+        // schedule the runnable for our next update.           
+        periodicUpdatesHandler.postDelayed(periodicUpdatesRunnable, storedPreferences.getUserTimePeriod());
+    }
     
     /**
      * Check Day Time
@@ -246,11 +252,17 @@ public class RandomQuotesApp extends Activity
      **/
     private boolean checkDaytime()
     {
+        final Context context = RandomQuotesApp.this;
+        
         int hourOfDay = Calendar.getInstance().get(Calendar.HOUR_OF_DAY);
         
-        Log.i(LOG_TAG, "checkDayTime, current time (24hr): " + hourOfDay);
+        // Create our stored preferences object
+        PreferencesStorage storedPreferences = new PreferencesStorage(context, APP_UNIQUE_INSTANCE_ID);
+        int[] daytime = storedPreferences.getUserDaytime();
         
-        if ((hourOfDay >= DAYTIME_START_HOUR) && (hourOfDay < DAYTIME_END_HOUR))
+        Log.i(LOG_TAG, "checkDaytime, current time (24hr): " + hourOfDay);
+        
+        if ((hourOfDay >= daytime[0]) && (hourOfDay < daytime[1]))
             return true;
         else
             return false;
@@ -278,7 +290,6 @@ public class RandomQuotesApp extends Activity
     /**
      * Update App View
      * Method called by elements wishing to update our app current view.
-     * @param context The specific context we use to grab a handle of the remoteViews.
      * @param currentAppData Array with data to display in the app view.
      **/ 
     public static void updateAppView(String[] currentAppData) 
@@ -287,7 +298,6 @@ public class RandomQuotesApp extends Activity
             + currentAppData[0] + ", " + currentAppData[1] + ", " 
             + currentAppData[2] + ", " + currentAppData[3] + ", " 
             + currentAppData[4] + "]");
-        
         
         // set quotes queue: index/lenght
         quotesIndexView.setText("queue number: " 

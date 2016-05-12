@@ -26,9 +26,12 @@ public class AppConfiguration extends Activity
     private static final String LOG_TAG = AppConfiguration.class.getName();
     
     private static final int PICKFILE_REQUEST_CODE = 1;
-        
-    // we only support one, app instance.
+    private static final int PICKFOLDER_REQUEST_CODE = 2;
+    
+    // we only support one app instance.
     private static final int APP_UNIQUE_INSTANCE_ID = 1;
+    
+    private static final int MINS_TO_MS_CONVERSION_FACTOR = 60*1000;
                 
     // view objects.
     private EditText fileEditText;
@@ -48,13 +51,12 @@ public class AppConfiguration extends Activity
         // now we will render the UI for the configure Activity.
         setContentView(R.layout.configure_layout);
 
-        // we will have a file name input that can be configured.
-        fileEditText = (EditText) findViewById(R.id.config_files_edittext);
-        
+        // Initialize view components.
+        fileEditText = (EditText) findViewById(R.id.config_files_edittext);        
         // Spinner, dropdown menus.
         timePeriodSpinner = (Spinner) findViewById(R.id.config_time_period_spinner);
         startDaytimeSpinner = (Spinner) findViewById(R.id.config_start_daytime_spinner);
-        endDaytimeSpinner = (Spinner) findViewById(R.id.config_end_daytime_spinner);
+        endDaytimeSpinner = (Spinner) findViewById(R.id.config_end_daytime_spinner);        
         
         // Where we will display messages regarding configuration details.
         logEditText = (EditText) findViewById(R.id.config_log_edittext);
@@ -90,14 +92,21 @@ public class AppConfiguration extends Activity
         
         // get the user input.
         String userFilePaths = fileEditText.getText().toString();
-        String userTimePeriod = timePeriodSpinner.getSelectedItem().toString();
-        String userStartDaytime = startDaytimeSpinner.getSelectedItem().toString();
-        String userEndDaytime = endDaytimeSpinner.getSelectedItem().toString();        
+        // Convert time properties to ints.
+        int userTimePeriod = Integer.parseInt(timePeriodSpinner.getSelectedItem().toString());
+        int userStartDaytime = Integer.parseInt(startDaytimeSpinner.getSelectedItem().toString());
+        int userEndDaytime = Integer.parseInt(endDaytimeSpinner.getSelectedItem().toString());        
         
-        // display what the user typed.
+        // display user file paths.
         configMessageLog = "User File Paths: " + userFilePaths;
         Log.d(LOG_TAG, configMessageLog);
         logEditText.append("* " + configMessageLog + "\n");                
+
+        // display user time properties.
+        configMessageLog = "Time Period (Mins): " + userTimePeriod 
+            + ", Daytime (24 Hr): " + userStartDaytime + " - " + userEndDaytime;
+        Log.d(LOG_TAG, configMessageLog);
+        logEditText.append("* " + configMessageLog + "\n");     
 
         // now lets break the string by our separator.
         String[] filePathsArray = userFilePaths.split(";"); 
@@ -115,12 +124,20 @@ public class AppConfiguration extends Activity
             return;
         }
 
+        // user data is valid, proceed to store it.
         configMessageLog = "Storing user preferences";
         Log.d(LOG_TAG, configMessageLog);
         logEditText.append("* " + configMessageLog + "\n");
 
-        // otherwise  let's store the valid user preferences.
-        storedPreferences.updateUserPreferences(filePathsArray);
+        // clear all prior user preferences. 
+        storedPreferences.deleteUserPreferences();
+
+        //let's store the valid user file paths.
+        storedPreferences.updateUserFilePaths(filePathsArray);
+
+        // store the time properties in mS.
+        storedPreferences.updateUserTimePeriod(userTimePeriod*MINS_TO_MS_CONVERSION_FACTOR);
+        storedPreferences.updateUserDaytime(new int[]{userStartDaytime, userEndDaytime});
                         
         configMessageLog = "Processing Text Files to Quotes";
         Log.d(LOG_TAG, configMessageLog);
@@ -133,7 +150,6 @@ public class AppConfiguration extends Activity
         configMessageLog = "Configuration Complete";
         Log.d(LOG_TAG, configMessageLog);
         logEditText.append("***" + configMessageLog + "*** \n");
-        
 
         // it is the responsibility of the Activity to update the App 
         // the first time when the configuration is complete.
@@ -157,12 +173,12 @@ public class AppConfiguration extends Activity
         // We will use this var for displaying our results
         String configMessageLog = "";
         
-        Intent fileintent = new Intent(Intent.ACTION_GET_CONTENT);
-        fileintent.setType("file/*");
+        Intent fileIntent = new Intent(Intent.ACTION_GET_CONTENT);
+        fileIntent.setType("file/*");
         
         try 
         {
-            startActivityForResult(fileintent, PICKFILE_REQUEST_CODE);
+            startActivityForResult(fileIntent, PICKFILE_REQUEST_CODE);
         } 
         catch (ActivityNotFoundException e) 
         {            
@@ -182,8 +198,23 @@ public class AppConfiguration extends Activity
     {
         Log.i(LOG_TAG, "scanFileDirectories");
         
-        // Todo.
+        // We will use this var for displaying our results
+        String configMessageLog = "";
         
+        Intent folderIntent = new Intent(Intent.ACTION_GET_CONTENT);
+        folderIntent.setType("resource/folder");
+        
+        try 
+        {
+            //startActivityForResult(folderIntent, PICKFOLDER_REQUEST_CODE);
+            startActivity(Intent.createChooser(folderIntent, "Open folder"));
+        } 
+        catch (ActivityNotFoundException e) 
+        {            
+            configMessageLog = "No 3rd party file explorer application found";
+            Log.d(LOG_TAG, configMessageLog);
+            logEditText.setText("* " + configMessageLog + "\n"); 
+        }
     }
 
     // called after the browser file picker returns.
@@ -211,6 +242,12 @@ public class AppConfiguration extends Activity
                 fileEditText.setText(filePath);
             else
                 fileEditText.append(";" + filePath);
+        }
+        else if (requestCode == PICKFILE_REQUEST_CODE)
+        {
+            // folder has been selected.
+            String folderPath = data.getData().getPath();
+            Log.d(LOG_TAG, "got folderPath: " + folderPath);  
         }
         else
         {

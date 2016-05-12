@@ -47,8 +47,8 @@ display a random quote in her phone home screen at periodic intervals.
     Support for scanning diretories and populating the book summaries list, 
     so that you dont have to select file by file.
     
-### Random Quotes Library.
-
+### Random Quotes Libraries.
+* Integrated file/dir choser library.
 
 ### Random Quotes Application.
 

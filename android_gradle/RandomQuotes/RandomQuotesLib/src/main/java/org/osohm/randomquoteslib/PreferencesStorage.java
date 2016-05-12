@@ -46,16 +46,13 @@ public class PreferencesStorage
     }
     
     /**
-     * Update User Preferences
-     * Put our validated user preferences in storage for easy retrieval 
-     * later.
+     * Update User File Paths
+     * Put our validated user-chosen file paths in storage for easy 
+     * retrieval later.
      * @param filePathsArray The array of user chosen file paths.  
      **/
-    public void updateUserPreferences(String[] filePathsArray)
+    public void updateUserFilePaths(String[] filePathsArray)
     {
-        // clear all of our current user preferences if any.
-        deleteUserPreferences();
-        
         // open shared preferences file for edit.
         SharedPreferences userPreferences = openUserPreferencesFile();
         SharedPreferences.Editor configurationEditor = userPreferences.edit();
@@ -72,12 +69,12 @@ public class PreferencesStorage
     }
     
     /**
-     * Get User Preferences
+     * Get User File Paths
      * Get the stored user-chosen preferences, get out all of our stored 
      * file paths.
      * @return String[] An array holding all of the user-chosen file paths.
      **/
-    public String[] getUserPreferences()
+    public String[] getUserFilePaths()
     {
         int arrayLength = 0;
         String[] filePathsArray;
@@ -95,7 +92,77 @@ public class PreferencesStorage
             filePathsArray[i] = userPreferences.getString("filePathsArray_" + i, null);
             
         return filePathsArray;
+    }
+    
+    /**
+     * Update User Time Period
+     * Put our app configuration time period in user preferences 
+     * storage for later retrieval. 
+     * @param timePeriod How often we display a new random quote.
+     **/
+    public void updateUserTimePeriod(int timePeriod)
+    {        
+        // open shared preferences file for edit.
+        SharedPreferences userPreferences = openUserPreferencesFile();
+        SharedPreferences.Editor configurationEditor = userPreferences.edit();
+        
+        // store the user-chosen time period.
+        configurationEditor.putInt("timePeriod", timePeriod);
+        
+        // Commit the edits!
+        configurationEditor.commit();
+    }
+    
+    /**
+     * Get User Time Period
+     * Get the stored user-chosen preferences, get our stored time period.
+     * @return int The refresh time period in minutes.
+     **/
+    public int getUserTimePeriod()
+    {
+        int timePeriod = 0;
+        
+        SharedPreferences userPreferences = openUserPreferencesFile();
+        
+        timePeriod = userPreferences.getInt("timePeriod", 0);
+            
+        return timePeriod;
+    }    
+    
+    /**
+     * Update User Daytime
+     * Put our app configuration daytime properties in user preferences. 
+     * @param startDaytime Start of Daytime as chosen by the user.
+     * @param endDaytime Start of Nighttime as chosen by the user.
+     **/
+    public void updateUserDaytime(int[] userDaytime)
+    {        
+        // open shared preferences file for edit.
+        SharedPreferences userPreferences = openUserPreferencesFile();
+        SharedPreferences.Editor configurationEditor = userPreferences.edit();
+        
+        configurationEditor.putInt("startDaytime", userDaytime[0]);
+        configurationEditor.putInt("endDaytime", userDaytime[1]);
+        
+        // Commit the edits!
+        configurationEditor.commit();
+    }
 
+    /**
+     * Get User Daytime
+     * Get the stored user-chosen preferences, get our daytime properties.
+     * @return int[] Array holding our start and end of daytime properties.
+     **/
+    public int[] getUserDaytime()
+    {
+        int[] userDaytime = new int[2];
+        
+        SharedPreferences userPreferences = openUserPreferencesFile();
+        
+        userDaytime[0] = userPreferences.getInt("startDaytime", 0);
+        userDaytime[1] = userPreferences.getInt("endDaytime", 0);
+        
+        return userDaytime;
     }
     
     /**
@@ -108,10 +175,7 @@ public class PreferencesStorage
      **/
     public void updateDataPreferences(String[] paragraphsArray, 
         String[] filePathsArray, String[] lineNumsArray)
-    {  
-        // clear all of our current data preferences if any.
-        deleteDataPreferences();
-        
+    {
         // open the sharedpreferences for edit.
         SharedPreferences dataPreferences = openDataPreferencesFile();
         SharedPreferences.Editor configurationEditor = dataPreferences.edit();
@@ -209,7 +273,7 @@ public class PreferencesStorage
      * Convenience method to delete any user preferences with our specific 
      * class properties.
      **/
-    private void deleteUserPreferences()
+    public void deleteUserPreferences()
     {
         SharedPreferences userPreferences = openUserPreferencesFile();
         SharedPreferences.Editor configurationEditor = userPreferences.edit();
@@ -222,7 +286,6 @@ public class PreferencesStorage
         File file= new File(context.getFilesDir().getParent() 
             + File.separator + QUOTES_USER_CONF_FILE + "_" + appInstanceId);
         file.delete();
-        
     }
     
     /**
@@ -230,7 +293,7 @@ public class PreferencesStorage
      * Convenience method to delete any data preferences with our specific 
      * class properties.
      **/
-    private void deleteDataPreferences()
+    public void deleteDataPreferences()
     {
         SharedPreferences dataPreferences = openDataPreferencesFile();
         SharedPreferences.Editor configurationEditor = dataPreferences.edit();

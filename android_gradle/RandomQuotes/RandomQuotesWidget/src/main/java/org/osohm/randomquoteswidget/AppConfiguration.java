@@ -128,8 +128,11 @@ public class AppConfiguration extends Activity
         Log.d(LOG_TAG, configMessageLog);
         logEditText.append("* " + configMessageLog + "\n");
 
-        // otherwise  let's store the valid user preferences.
-        storedPreferences.updateUserPreferences(filePathsArray);
+        // clear prior user preferences. 
+        storedPreferences.deleteUserPreferences();
+
+        // let's store the valid user preferences.
+        storedPreferences.updateUserFilePaths(filePathsArray);
                         
         configMessageLog = "Processing Text Files to Quotes";
         Log.d(LOG_TAG, configMessageLog);

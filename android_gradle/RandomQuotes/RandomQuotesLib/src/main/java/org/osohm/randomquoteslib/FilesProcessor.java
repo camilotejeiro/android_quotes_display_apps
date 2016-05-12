@@ -139,7 +139,7 @@ public class FilesProcessor
         List<String> filePathsList = new ArrayList<String>();
         List<String> lineNumbersList = new ArrayList<String>();
         
-        userFilePaths = storedPreferences.getUserPreferences();
+        userFilePaths = storedPreferences.getUserFilePaths();
         
         for (int i = 0; i < userFilePaths.length; i++)
         {
@@ -234,6 +234,9 @@ public class FilesProcessor
         shuffleArray(paragraphsArray, filePathsArray, lineNumbersArray);
         
         Log.d(LOG_TAG, "Arrays Shuffled Succesfully");
+        
+        // clear our old preferences.
+        storedPreferences.deleteDataPreferences();
         
         // commit our changes to a data preferences file.
         storedPreferences.updateDataPreferences(paragraphsArray, 
