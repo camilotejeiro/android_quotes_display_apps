@@ -8,6 +8,7 @@ import android.content.ActivityNotFoundException;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.Spinner;
 
 // import our shared common library classes.
 import org.osohm.randomquoteslib.PreferencesStorage;
@@ -32,6 +33,9 @@ public class AppConfiguration extends Activity
     // view objects.
     private EditText fileEditText;
     private EditText logEditText;
+    private Spinner timePeriodSpinner;
+    private Spinner startDaytimeSpinner;
+    private Spinner endDaytimeSpinner;
                 
     @Override
     protected void onCreate (Bundle savedInstanceState)
@@ -46,6 +50,11 @@ public class AppConfiguration extends Activity
 
         // we will have a file name input that can be configured.
         fileEditText = (EditText) findViewById(R.id.config_files_edittext);
+        
+        // Spinner, dropdown menus.
+        timePeriodSpinner = (Spinner) findViewById(R.id.config_time_period_spinner);
+        startDaytimeSpinner = (Spinner) findViewById(R.id.config_start_daytime_spinner);
+        endDaytimeSpinner = (Spinner) findViewById(R.id.config_end_daytime_spinner);
         
         // Where we will display messages regarding configuration details.
         logEditText = (EditText) findViewById(R.id.config_log_edittext);
@@ -79,16 +88,19 @@ public class AppConfiguration extends Activity
         // reset our edit text.
         logEditText.setText("");
         
-        // get the text from the text input view
-        String userInput = fileEditText.getText().toString();
+        // get the user input.
+        String userFilePaths = fileEditText.getText().toString();
+        String userTimePeriod = timePeriodSpinner.getSelectedItem().toString();
+        String userStartDaytime = startDaytimeSpinner.getSelectedItem().toString();
+        String userEndDaytime = endDaytimeSpinner.getSelectedItem().toString();        
         
         // display what the user typed.
-        configMessageLog = "User Input: " + userInput;
+        configMessageLog = "User File Paths: " + userFilePaths;
         Log.d(LOG_TAG, configMessageLog);
         logEditText.append("* " + configMessageLog + "\n");                
 
         // now lets break the string by our separator.
-        String[] filePathsArray = userInput.split(";"); 
+        String[] filePathsArray = userFilePaths.split(";"); 
         
         // check our files to make sure everything is correct.
         configStatus = filesProcessor.checkFilePaths(filePathsArray); 
@@ -130,13 +142,12 @@ public class AppConfiguration extends Activity
         
         // end the activity.
         finish();
-        
     }
 
     /**
      * Browse File Directories
      * Method called by Android onClick "Browse" in our app configuration screen. 
-     * See the onClick property in the config   ure_layout.xml button element.
+     * See the onClick property in the configure_layout.xml button element.
      * @param View  
      **/    
     public void browseFileDirectories(View view) 
@@ -159,6 +170,19 @@ public class AppConfiguration extends Activity
             Log.d(LOG_TAG, configMessageLog);
             logEditText.setText("* " + configMessageLog + "\n"); 
         }
+    }
+
+    /**
+     * Scan File Directories
+     * Method called by Android onClick "Scan" in our app configuration screen. 
+     * See the onClick property in the configure_layout.xml button element.
+     * @param View  
+     **/    
+    public void scanFileDirectories(View view) 
+    {
+        Log.i(LOG_TAG, "scanFileDirectories");
+        
+        // Todo.
         
     }
 
@@ -181,7 +205,7 @@ public class AppConfiguration extends Activity
             String filePath = data.getData().getPath();
             Log.d(LOG_TAG, "got filePath: " + filePath);  
 
-            Log.d(LOG_TAG, "File Picked Successfully");                   
+            Log.d(LOG_TAG, "File Picked Successfully");
             // is the editText empty, then don't prefix ';' just set.
             if (fileEditText.getText().toString().trim().length() == 0)
                 fileEditText.setText(filePath);

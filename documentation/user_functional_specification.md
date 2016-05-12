@@ -32,19 +32,20 @@ on Tap or at periodic Intervals. She installs the Random Quotes Widget to
 display a random quote in her phone home screen at periodic intervals. 
 
 
-## Features
+## Features & Issues to Solve
 ---
 
 ### Random Quotes Widget
 
 * Change project Ownership.
-    org.osohm ...
+    org.osohm
+    > Done.
+
+* Add menu of different periodic intervals.
 
 * Scan Directories.
     Support for scanning diretories and populating the book summaries list, 
     so that you dont have to select file by file.
-    
-* Add menu of different periodic intervals.
     
 ### Random Quotes Library.
 
@@ -52,9 +53,14 @@ display a random quote in her phone home screen at periodic intervals.
 ### Random Quotes Application.
 
 * Change project Ownership.
-    org.osohm ...
+    org.osohm
+    > Done.
 
 * Fix deprecated functionality.
+    Wakelock and KeyguardLock.
+    > Done.
+
+* Add menu of different periodic intervals.
 
 * Scan Directories.
     Support for scanning diretories and populating the book summaries list, 
@@ -63,16 +69,15 @@ display a random quote in her phone home screen at periodic intervals.
 * Select Start & End Time.
     When the picture frame turns on. When the frame turns off.
 
-* Add menu of different periodic intervals.
-
-## Posponed Features.
+## Posponed/Removed Features.
 ---
 
-* Open Settings from widget (v2.2). 
-    Support for opening app settings from the widget display view. 
-    Bottom left corner.
-
-* Open text file directly from view. (v2.3)
+* Open text file directly from view. (v3.0)
+    Could be nice (not necessary) when integrated with a nice text 
+    editor and server synchronization.
+ 
+* Change backend storage to a databse. (v3.0)
+    Could be nice (not necessary) with large number of text files.
  
 * Put app in f-droid (removed)
     Their instructions are terribly outdated. Had to troubleshoot 

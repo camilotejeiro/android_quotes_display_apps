@@ -2,16 +2,51 @@
     <string name="app_name">Random Quotes App</string>
     
     <!-- configure screen string resources -->
-    <string name="config_title_textview">App Configuration</string>
-    <string name="configure_screen_instructions">
-        Please enter the paths for the text files with your quotes, 
-        pick multiple files with a file browser or enter them manually.
-        Separate multiple files with the ; character. \n
-        e.g. you can enter: storage/sdcard0/file1.txt;storage/extSdCard/file2.txt 
+    <string name="config_title">Random Quotes App Configuration</string>
+    <string name="config_files_title">
+        Enter the paths for the text files with your quotes.
+    </string>    
+    <string name="config_files_instructions">
+        Pick/scan (using a file browser) or enter them manually 
+        (separate multiple files with the ; character).
     </string>
-    <string name="config_log_edittext">*** Configuration Screen Log *** \n</string>
-    <string name="config_ok_button">OK</string>
+    <string name="config_save_button">Save Configuration</string>
     <string name="config_browse_button">Browse</string>
+    <string name="config_scan_button">Scan</string> 
+    <string name="config_time_title">
+        Enter the update period and the daytime start/end times.
+    </string>
+    <string name="config_time_period_instructions">
+        Update period (minutes): How often a new random quote is displayed.
+    </string>
+    <string-array name="config_time_period_array">
+        <item>1</item>
+        <item>5</item>
+        <item>10</item>
+        <item>15</item>
+        <item>30</item>
+        <item>60</item>
+        <item>90</item>
+    </string-array>
+    <string name="config_start_daytime_instructions">
+        Start Daytime (24hr format): When the screen should turn ON.
+    </string>
+    <string-array name="config_start_daytime_array">
+        <item>6</item>
+        <item>7</item>
+        <item>8</item>
+        <item>9</item>        
+    </string-array>
+    <string name="config_end_daytime_instructions">
+        End Daytime (24hr format): When the screen should turn OFF.
+    </string>
+    <string-array name="config_end_daytime_array">
+        <item>18</item>
+        <item>19</item>
+        <item>20</item>
+        <item>21</item>        
+    </string-array>
+    <string name="config_log_edittext">*** Configuration Screen Log *** \n</string>
     
     <!-- App screen string resources -->
     <string name="app_file_name_textview">no text file(s), tap to configure</string>

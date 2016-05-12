@@ -12,8 +12,21 @@
             android:id="@+id/config_title_textview"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/config_title_textview"
-            android:textAppearance="?android:attr/textAppearanceLarge"/>
+            android:text="@string/config_title"
+            android:textAppearance="?android:attr/textAppearanceMedium"/>
+        <TextView
+            android:id="@+id/config_files_title_textview"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/config_files_title"
+            android:textAppearance="?android:attr/textAppearanceSmall" 
+            android:textStyle="bold"/> 
+        <TextView
+            android:id="@+id/config_files_instructions_textview"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/config_files_instructions"
+            android:textAppearance="?android:attr/textAppearanceSmall" /> 
         <EditText
             android:id="@+id/config_files_edittext"
             android:layout_width="match_parent"
@@ -25,25 +38,67 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal" >
             <Button
-                android:id="@+id/config_ok_button"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/config_ok_button" 
-                android:onClick="saveUserConfiguration"/>
-            <Button
                 android:id="@+id/config_browse_button"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/config_browse_button" 
                 android:onClick="browseFileDirectories"/>
+            <Button
+                android:id="@+id/config_scan_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/config_scan_button" 
+                android:onClick="scanFileDirectories"/>
         </LinearLayout>
         
         <TextView
-            android:id="@+id/config_instructions_textview"
+            android:id="@+id/config_time_title_textview"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/configure_screen_instructions"
-            android:textAppearance="?android:attr/textAppearanceSmall" /> 
+            android:text="@string/config_time_title"
+            android:textAppearance="?android:attr/textAppearanceSmall" 
+            android:textStyle="bold"/> 
+        <TextView
+            android:id="@+id/config_time_period_instructions_textview"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/config_time_period_instructions"
+            android:textAppearance="?android:attr/textAppearanceSmall" />         
+        <Spinner
+            android:id="@+id/config_time_period_spinner"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" 
+            android:entries="@array/config_time_period_array"/>
+        <TextView
+            android:id="@+id/config_start_daytime_instructions_textview"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/config_start_daytime_instructions"
+            android:textAppearance="?android:attr/textAppearanceSmall" />     
+        <Spinner
+            android:id="@+id/config_start_daytime_spinner"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" 
+            android:entries="@array/config_start_daytime_array"/>
+        <TextView
+            android:id="@+id/config_end_daytime_instructions_textview"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/config_end_daytime_instructions"
+            android:textAppearance="?android:attr/textAppearanceSmall" />       
+        <Spinner
+            android:id="@+id/config_end_daytime_spinner"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" 
+            android:entries="@array/config_end_daytime_array"/>
+                  
+        <Button
+            android:id="@+id/config_save_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/config_save_button" 
+            android:onClick="saveUserConfiguration"/>
+    
         <EditText
             android:id="@+id/config_log_edittext"
             android:layout_width="match_parent"

@@ -1,17 +1,15 @@
 package org.osohm.randomquotesapp;
 
 import android.app.Activity;
-import android.app.KeyguardManager;
-import android.app.KeyguardManager.KeyguardLock;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.os.Bundle;
 import android.os.Handler;
-import android.os.PowerManager;
-import android.os.PowerManager.WakeLock;
 import android.content.Intent;
 import android.util.Log;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.TextView;
 
 import java.util.Calendar;
@@ -52,11 +50,6 @@ public class RandomQuotesApp extends Activity
     // handler for our periodic updates.
     private Handler periodicUpdatesHandler;
     
-    // wake lock to keep the device on as a picture frame as necessary.
-    private WakeLock wakeLock;
-    
-    private KeyguardLock keyguardLock;
-    
     // calendar for getting time of day (to wake up frame at AM and sleep at PM)
     private Calendar calendar;
     
@@ -69,19 +62,11 @@ public class RandomQuotesApp extends Activity
          
         Log.i(LOG_TAG, "onCreate");        
 
-        // instantiating our keyguardlock.
-        KeyguardManager keyguardManager = (KeyguardManager) getSystemService(Context.KEYGUARD_SERVICE); 
-        keyguardLock = keyguardManager.newKeyguardLock("Picture Frame Keyguard Lock"); 
-        
-        // make sure the keyguardLock is disabled when this app is active.
-        keyguardLock.disableKeyguard(); 
-        
-        // instantiating our wakelock.
-        PowerManager powerManager = (PowerManager) getSystemService(Context.POWER_SERVICE);
-        wakeLock = powerManager.newWakeLock(
-            PowerManager.SCREEN_BRIGHT_WAKE_LOCK | PowerManager.ACQUIRE_CAUSES_WAKEUP, 
-            "Picture Frame Device Wake Lock");
-        
+        // Window properties: Show app activity in front of lockscreen 
+        // and show app activity in fullscreen mode.
+        getWindow().addFlags(WindowManager.LayoutParams.FLAG_SHOW_WHEN_LOCKED 
+            | WindowManager.LayoutParams.FLAG_FULLSCREEN);
+
         setContentView(R.layout.app_layout);
         
         // get a handle of our view objects.
@@ -109,8 +94,8 @@ public class RandomQuotesApp extends Activity
         {     
             Log.d(LOG_TAG, "Found prior stored data preferences");
             
-            // handle wakelock depending on time of day.
-            handleWakeLock(checkDaytime());
+            // Turn Screen ON, depending on time of day.
+            handleScreenOn(checkDaytime());
             
             // update the app with our current quote.
             updateAppView(currentQuote); 
@@ -126,16 +111,7 @@ public class RandomQuotesApp extends Activity
     protected void onDestroy()
     {          
         Log.i(LOG_TAG, "onDestroy"); 
-    
-        Log.d(LOG_TAG, "Releasing full wakelock");     
-        
-        // release wake lock if necessary.
-        if (wakeLock.isHeld() == true)
-            wakeLock.release();
-        
-        // activate lock screen after app is done.
-        keyguardLock.reenableKeyguard(); 
-        
+
         Log.d(LOG_TAG, "Disabling periodic updates"); 
         periodicUpdatesHandler.removeCallbacks(periodicUpdatesRunnable);
     
@@ -216,8 +192,8 @@ public class RandomQuotesApp extends Activity
         {
             Log.d(LOG_TAG, "periodicUdatesRunnable: Scheduling periodic updates");
             
-            // handle wakelock depending on time of day.
-            handleWakeLock(checkDaytime());
+            // Turn Screen ON, depending on time of day.
+            handleScreenOn(checkDaytime());
 
             // get our first quote.
             String [] currentQuote = getCurrentQuote();
@@ -243,11 +219,10 @@ public class RandomQuotesApp extends Activity
         {
             Log.i(LOG_TAG, "periodicUdatesRunnable: Executing periodic update");
             
-            // check to see if it is daytime.
             boolean daytime = checkDaytime();
             
-            // acquire or release wakelock as applicable.
-            handleWakeLock(daytime);
+            // Turn Screen ON, depending on time of day.
+            handleScreenOn(daytime);
             
             // only update quotes if on daytime (otherwise is futile)
             if (daytime == true)
@@ -282,25 +257,21 @@ public class RandomQuotesApp extends Activity
     }
 
     /**
-     * Handle Wake Lock
-     * Method called to acquire or release WakeLock based on time of day.
-     * @param dayTime The flag indicating whether is daytime or not.
+     * Handle Screen ON
+     * Set window properties to set screen state based on time of the day.
+     * @param daytime The flag indicating whether is daytime or not.
      **/    
-    private void handleWakeLock(boolean dayTime)
+    private void handleScreenOn(boolean daytime)
     {
-        Log.i(LOG_TAG, "handleWakeLock, daytime: " + dayTime);
+        Log.i(LOG_TAG, "handleScreenOn, daytime: " + daytime);
         
-        if (dayTime == true)
+        if (daytime == true)
         {
-            // acquire wakelock to keep screen ON if necessary.
-            if (wakeLock.isHeld() == false)
-                wakeLock.acquire();                
+            getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);         
         }
         else
         {
-            // release wakelock to let phone go to sleep as necessary.
-            if (wakeLock.isHeld() == true)
-                wakeLock.release();
+            getWindow().clearFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
         }
     }
     
