@@ -9,10 +9,16 @@ import android.content.ActivityNotFoundException;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.Spinner;
+
+import java.io.File;
+import java.io.FilenameFilter;
 
 // import our shared common library classes.
 import org.osohm.randomquoteslib.PreferencesStorage;
 import org.osohm.randomquoteslib.FilesProcessor;
+
+import ar.com.daidalos.afiledialog.FileChooserActivity;
 
 /***********************************************************************
  * App Configuration
@@ -25,11 +31,16 @@ public class AppConfiguration extends Activity
 {
     private static final String LOG_TAG = AppConfiguration.class.getName();
     
-    private static final int PICKFILE_REQUEST_CODE = 1;
+    private static final int PICK_FILE_REQUEST_CODE = 1;
+    private static final int PICK_FOLDER_REQUEST_CODE = 2;
+                
+    // view objects.
+    private static final int MINS_TO_MS_CONVERSION_FACTOR = 60*1000;
                 
     // view objects.
     private EditText fileEditText;
     private EditText logEditText;
+    private Spinner timePeriodSpinner;
                 
     // declare and reset our AppwidgetID.
     private int myAppWidgetId = AppWidgetManager.INVALID_APPWIDGET_ID;
@@ -68,6 +79,9 @@ public class AppConfiguration extends Activity
         // we will have a file name input that can be configured in the widget.
         fileEditText = (EditText) findViewById(R.id.config_files_edittext);
         
+        // Spinner, dropdown menu.
+        timePeriodSpinner = (Spinner) findViewById(R.id.config_time_period_spinner);
+        
         // Where we will display messages regarding configuration details.
         logEditText = (EditText) findViewById(R.id.config_log_edittext);
     }
@@ -100,16 +114,23 @@ public class AppConfiguration extends Activity
         Log.d(LOG_TAG, configMessageLog);
         logEditText.setText("* " +  configMessageLog + "\n");
         
-        // get the text from the text input view
-        String userInput = fileEditText.getText().toString();
+        // get the user input.
+        String userFilePaths = fileEditText.getText().toString();
+        // Convert time properties to ints.
+        int userTimePeriod = Integer.parseInt(timePeriodSpinner.getSelectedItem().toString());
         
-        // display what the user typed.
-        configMessageLog = "User Input: " + userInput;
+        // display user file paths.
+        configMessageLog = "User File Paths: " + userFilePaths;
         Log.d(LOG_TAG, configMessageLog);
-        logEditText.append("* " + configMessageLog + "\n");                
+        logEditText.append("* " + configMessageLog + "\n");
+
+       // display user time properties.
+        configMessageLog = "Time Period (Mins): " + userTimePeriod;
+        Log.d(LOG_TAG, configMessageLog);
+        logEditText.append("* " + configMessageLog + "\n"); 
 
         // now lets break the string by our separator.
-        String[] filePathsArray = userInput.split(";"); 
+        String[] filePathsArray = userFilePaths.split(";"); 
         
         // check our files to make sure everything is correct.
         configStatus = filesProcessor.checkFilePaths(filePathsArray); 
@@ -124,6 +145,7 @@ public class AppConfiguration extends Activity
             return;
         }
 
+        // user data is valid, proceed to store it.
         configMessageLog = "Storing user preferences";
         Log.d(LOG_TAG, configMessageLog);
         logEditText.append("* " + configMessageLog + "\n");
@@ -131,9 +153,12 @@ public class AppConfiguration extends Activity
         // clear prior user preferences. 
         storedPreferences.deleteUserPreferences();
 
-        // let's store the valid user preferences.
+        // let's store the valid user filePaths.
         storedPreferences.updateUserFilePaths(filePathsArray);
-                        
+          
+        // store the time properties in mS.
+        storedPreferences.updateUserTimePeriod(userTimePeriod*MINS_TO_MS_CONVERSION_FACTOR);
+
         configMessageLog = "Processing Text Files to Quotes";
         Log.d(LOG_TAG, configMessageLog);
         logEditText.append("* " + configMessageLog + "\n");
@@ -146,7 +171,6 @@ public class AppConfiguration extends Activity
         Log.d(LOG_TAG, configMessageLog);
         logEditText.append("***" + configMessageLog + "*** \n");
         
-
         // When an App Widget uses a configuration Activity, it is 
         // the responsibility of the Activity to update the App 
         // the first time when the Widget when configuration is complete.
@@ -181,54 +205,94 @@ public class AppConfiguration extends Activity
         // We will use this var for displaying our results
         String configMessageLog = "";
         
-        Intent fileintent = new Intent(Intent.ACTION_GET_CONTENT);
-        fileintent.setType("file/*");
+        // create intent to launch the filechooser in default file mode.
+        Intent fileIntent = new Intent(AppConfiguration.this, FileChooserActivity.class);
+        startActivityForResult(fileIntent, PICK_FILE_REQUEST_CODE);
+    }
+
+    /**
+     * Scan File Directories
+     * Method called by Android onClick "Scan" in our app configuration screen. 
+     * See the onClick property in the configure_layout.xml button element.
+     * @param View  
+     **/    
+    public void scanFileDirectories(View view) 
+    {
+        Log.i(LOG_TAG, "scanFileDirectories");
         
-        try 
-        {
-            startActivityForResult(fileintent, PICKFILE_REQUEST_CODE);
-        } 
-        catch (ActivityNotFoundException e) 
-        {            
-            configMessageLog = "No 3rd party file explorer application found, " 
-                + "please install one to use the browse functionality";
-            Log.d(LOG_TAG, configMessageLog);
-            logEditText.setText("* " + configMessageLog + "\n"); 
-        }
+        // We will use this var for displaying our results
+        String configMessageLog = "";
         
+        // create intent to launch the filechooser in folder mode.
+        Intent folderIntent = new Intent(AppConfiguration.this, FileChooserActivity.class);
+        folderIntent.putExtra(FileChooserActivity.INPUT_FOLDER_MODE, true);
+        this.startActivityForResult(folderIntent, PICK_FOLDER_REQUEST_CODE);        
     }
 
     // called after the browser file picker returns.
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) 
-    {
+    { 
         Log.i(LOG_TAG, "onActivityResult, Request code: " + requestCode 
             + ", Result Code: " + resultCode);
         
-        // check to make sure we received data.
-        if (data == null || data.getData() == null)
+        if (resultCode == RESULT_OK)
         {
-            // received no data, mmmph
-            Log.d(LOG_TAG, "Null intent: Received no data");
-        }
-        else if (requestCode == PICKFILE_REQUEST_CODE)
-        {
-            // file has been selected.
-            String filePath = data.getData().getPath();
-            Log.d(LOG_TAG, "got filePath: " + filePath);  
+            Bundle bundle = data.getExtras();
+            
+            if (requestCode == PICK_FILE_REQUEST_CODE)
+            {
+                File filePicked = (File) bundle.get(FileChooserActivity.OUTPUT_FILE_OBJECT);
+                
+                String filePath = filePicked.getAbsolutePath();
+                
+                Log.d(LOG_TAG, "got filePath: " + filePath);  
 
-            Log.d(LOG_TAG, "File Picked Successfully");                   
-            // is the editText empty, then don't prefix ';' just set.
-            if (fileEditText.getText().toString().trim().length() == 0)
-                fileEditText.setText(filePath);
+                // is the editText empty, then don't prefix ';' just set.
+                if (fileEditText.getText().toString().trim().length() == 0)
+                    fileEditText.setText(filePath);
+                else
+                    fileEditText.append(";" + filePath);                    
+            }
+            else if (requestCode == PICK_FOLDER_REQUEST_CODE)
+            {
+                File folderPicked = (File) bundle.get(FileChooserActivity.OUTPUT_FILE_OBJECT);
+
+                Log.d(LOG_TAG, "got folderPath: " + folderPicked.getAbsolutePath());  
+                
+                // scan for text files in directory: List files and filter by ".txt"
+                File[] filesScanned = folderPicked.listFiles(new FilenameFilter() 
+                {
+                    public boolean accept(File dir, String name) 
+                    {
+                        return name.toLowerCase().endsWith(".txt");
+                    }
+                });
+                
+                // add one by one to the editText View
+                for (int i = 0; i < filesScanned.length; ++i) 
+                {
+                    String filePath = filesScanned[i].getAbsolutePath();
+                    
+                    Log.d(LOG_TAG, "File Scanned: " + filePath);
+                    
+                    // is the editText empty, then don't prefix ';'
+                    if (fileEditText.getText().toString().trim().length() == 0)
+                        fileEditText.setText(filePath);
+                    else
+                        fileEditText.append(";" + filePath);                      
+                }                                
+            }
             else
-                fileEditText.append(";" + filePath);
+            {
+                // Result Failed
+                Log.d(LOG_TAG, "Unknown request code"); 
+            }
         }
         else
         {
-            // This is not our request (different request code)
-            Log.d(LOG_TAG, "Different request code");
-            return;
+            // Result Failed
+            Log.d(LOG_TAG, "Result Code: Operation not successful");            
         }
     }
 }

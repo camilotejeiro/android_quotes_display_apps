@@ -50,4 +50,5 @@ android
 dependencies 
 {
     compile project(':RandomQuotesLib')
+    compile project(':aFileDialogLib')
 }

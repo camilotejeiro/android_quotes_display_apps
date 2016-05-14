@@ -10,7 +10,6 @@
         Pick/scan (using a file browser) or enter them manually 
         (separate multiple files with the ; character).
     </string>
-    <string name="config_save_button">Save Configuration</string>
     <string name="config_browse_button">Browse</string>
     <string name="config_scan_button">Scan</string> 
     <string name="config_time_title">
@@ -26,7 +25,6 @@
         <item>15</item>
         <item>30</item>
         <item>60</item>
-        <item>90</item>
     </string-array>
     <string name="config_start_daytime_instructions">
         Start Daytime (24hr format): When the screen should turn ON.
@@ -46,6 +44,7 @@
         <item>20</item>
         <item>21</item>        
     </string-array>
+    <string name="config_save_button">Save Configuration</string>
     <string name="config_log_edittext">*** Configuration Screen Log *** \n</string>
     
     <!-- App screen string resources -->

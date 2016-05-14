@@ -21,6 +21,11 @@
         <activity
             android:name="org.osohm.randomquotesapp.AppConfiguration" >
         </activity> 
+        
+        <activity 
+            android:name="ar.com.daidalos.afiledialog.FileChooserActivity" >
+        </activity>
+        
     </application>
 
 </manifest>

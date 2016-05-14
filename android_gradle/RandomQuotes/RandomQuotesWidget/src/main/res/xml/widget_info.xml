@@ -6,5 +6,5 @@
     android:minWidth="300dp"
     android:updatePeriodMillis="3600000"
     android:resizeMode="horizontal|vertical"
-    android:configure="com.cat.randomquoteswidget.AppConfiguration">
+    android:configure="org.osohm.randomquoteswidget.AppConfiguration">
 </appwidget-provider> 

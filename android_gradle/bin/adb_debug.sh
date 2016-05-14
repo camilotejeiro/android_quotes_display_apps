@@ -34,7 +34,7 @@ log_priority[log_filter_index++]='W'
 # ---
 # Apply logcat filters.
 # ---
-echo "* Starting android applications debugging script *"
+printf "%s\n" '* Starting android applications debugging script'
 
 # concatenate, append and create our filters.
 for ((index=0; index<$log_filter_index; index++))
@@ -42,8 +42,6 @@ do
     log_filter+="${log_tag[index]}:${log_priority[index]} "
 done
 
-echo ""
-echo "adb logcat $log_filter"
-echo ""
+printf "\n%s\n\n" "adb logcat $log_filter"
 
 adb logcat $log_filter

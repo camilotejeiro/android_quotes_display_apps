@@ -157,7 +157,7 @@ public class RandomQuotesWidget extends AppWidgetProvider
         
         // we need to specify and pass an array of IDs, even if we are only passing one. 
         // i.e. DO NOT use EXTRA_APPWIDGET_ID use EXTRA_APPWIDGET_IDS and 
-        // do not pass a single int pass a one item arraym, otherwise 
+        // do not pass a single int pass a one item array, otherwise 
         // the onUpdate callback will not get called!
         updateIntent.putExtra(AppWidgetManager.EXTRA_APPWIDGET_IDS, new int[] {appWidgetId});
 
