@@ -5,6 +5,8 @@ import android.app.PendingIntent;
 import android.content.Context;
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.PowerManager;
+import android.os.PowerManager.WakeLock;
 import android.content.Intent;
 import android.util.Log;
 import android.view.View;
@@ -42,6 +44,9 @@ public class RandomQuotesApp extends Activity
     // handler for our periodic updates.
     private Handler periodicUpdatesHandler;
     
+    // wake lock to keep the device on as a picture frame as necessary.
+    private WakeLock wakeLock;
+    
     // calendar for getting time of day (to wake up frame at AM and sleep at PM)
     private Calendar calendar;
     
@@ -52,12 +57,25 @@ public class RandomQuotesApp extends Activity
         // when "creating": Call super on create first (prevents nullPointers).
         super.onCreate(savedInstanceState);
          
-        Log.i(LOG_TAG, "onCreate");        
+        Log.i(LOG_TAG, "onCreate");  
 
         // Window properties: Show app activity in front of lockscreen 
         // and show app activity in fullscreen mode.
-        getWindow().addFlags(WindowManager.LayoutParams.FLAG_SHOW_WHEN_LOCKED 
+        this.getWindow().addFlags(WindowManager.LayoutParams.FLAG_SHOW_WHEN_LOCKED 
             | WindowManager.LayoutParams.FLAG_FULLSCREEN);
+
+        // Creating our wakelock (I know it's deprecated).
+        // Use Wakelocks to turn screen ON until they become obsolete! 
+        // Why? Setting/clearing the layoutParameter FLAG_TURN_SCREEN_ON 
+        // does NOT work. It can only be set once at the start of the 
+        // activity. Furthemore the adjusting screen brightness hack 
+        // does not turn the screen fully OFF and also if the 
+        // user locks the screen, which everyone does, we can not 
+        // really turn the screen ON again, it's useless. Stick to your wakelock. 
+        PowerManager powerManager = (PowerManager) getSystemService(Context.POWER_SERVICE);
+        wakeLock = powerManager.newWakeLock(
+            PowerManager.SCREEN_BRIGHT_WAKE_LOCK | PowerManager.ACQUIRE_CAUSES_WAKEUP, 
+            "Picture Frame Device Wake Lock");
 
         setContentView(R.layout.app_layout);
         
@@ -87,7 +105,7 @@ public class RandomQuotesApp extends Activity
             Log.d(LOG_TAG, "Found prior stored data preferences");
             
             // Turn Screen ON, depending on time of day.
-            handleScreenOn(checkDaytime());
+            handleWakeLock(checkDaytime());
             
             // update the app with our current quote.
             updateAppView(currentQuote); 
@@ -102,6 +120,10 @@ public class RandomQuotesApp extends Activity
     protected void onDestroy()
     {          
         Log.i(LOG_TAG, "onDestroy"); 
+
+        // release wake lock if necessary.
+        if (wakeLock.isHeld() == true)
+            wakeLock.release();
 
         Log.d(LOG_TAG, "Disabling periodic updates"); 
         periodicUpdatesHandler.removeCallbacks(periodicUpdatesRunnable);
@@ -184,7 +206,7 @@ public class RandomQuotesApp extends Activity
             Log.d(LOG_TAG, "periodicUdatesRunnable: Scheduling periodic updates");
             
             // Turn Screen ON, depending on time of day.
-            handleScreenOn(checkDaytime());
+            handleWakeLock(checkDaytime());
 
             // get our first quote.
             String [] currentQuote = getCurrentQuote();
@@ -212,7 +234,7 @@ public class RandomQuotesApp extends Activity
             boolean daytime = checkDaytime();
             
             // Turn Screen ON, depending on time of day.
-            handleScreenOn(daytime);
+            handleWakeLock(daytime);
             
             // only update quotes if on daytime (otherwise is futile)
             if (daytime == true)
@@ -243,6 +265,7 @@ public class RandomQuotesApp extends Activity
         
         // schedule the runnable for our next update.           
         periodicUpdatesHandler.postDelayed(periodicUpdatesRunnable, storedPreferences.getUserTimePeriod());
+    
     }
     
     /**
@@ -256,11 +279,11 @@ public class RandomQuotesApp extends Activity
         
         int hourOfDay = Calendar.getInstance().get(Calendar.HOUR_OF_DAY);
         
+        Log.i(LOG_TAG, "checkDaytime, current time (24hr): " + hourOfDay);
+        
         // Create our stored preferences object
         PreferencesStorage storedPreferences = new PreferencesStorage(context, APP_UNIQUE_INSTANCE_ID);
         int[] daytime = storedPreferences.getUserDaytime();
-        
-        Log.i(LOG_TAG, "checkDaytime, current time (24hr): " + hourOfDay);
         
         if ((hourOfDay >= daytime[0]) && (hourOfDay < daytime[1]))
             return true;
@@ -269,21 +292,27 @@ public class RandomQuotesApp extends Activity
     }
 
     /**
-     * Handle Screen ON
-     * Set window properties to set screen state based on time of the day.
+     * Handle Wake Lock
+     * Set wakeLock properties to set screen state based on time of the 
+     * day (I know it's deprecated see comments above).
      * @param daytime The flag indicating whether is daytime or not.
      **/    
-    private void handleScreenOn(boolean daytime)
+    private void handleWakeLock(boolean daytime)
     {
-        Log.i(LOG_TAG, "handleScreenOn, daytime: " + daytime);
+        Log.i(LOG_TAG, "handleWakeLock, daytime: " + daytime);
         
         if (daytime == true)
         {
-            getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);         
+            // acquire wakelock to keep screen ON if necessary.
+            if (wakeLock.isHeld() == false)
+                wakeLock.acquire();
+                            
         }
         else
         {
-            getWindow().clearFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
+            // release wakelock to let phone go to sleep as necessary.
+            if (wakeLock.isHeld() == true)
+                wakeLock.release();
         }
     }
     
@@ -309,6 +338,8 @@ public class RandomQuotesApp extends Activity
         fileNameView.setText(fileName);
         // set line number
         lineNumberView.setText("line number: " + currentAppData[4]);
+        
+        
         
     }
 }

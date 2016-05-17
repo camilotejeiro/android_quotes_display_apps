@@ -37,49 +37,63 @@ display a random quote in her phone home screen at periodic intervals.
 
 ### Random Quotes Widget
 
-* Change project Ownership.
-    org.osohm
+* Change project Ownership.  
+    org.osohm  
     > Done.
 
-* Add menu of different periodic intervals.
+* Add menu of different periodic intervals.  
+    > Done.
 
-* Scan Directories.
-    Support for scanning diretories and populating the book summaries list, 
-    so that you dont have to select file by file.
+* Scan Directories.  
+    Support for scanning diretories and populating the book summaries list,  
+    so that you dont have to select file by file.  
+    > Done.
+
+* Add support for variable widget updates.  
+    
     
 ### Random Quotes Libraries.
-* Integrated file/dir choser library.
+* Integrated file/dir choser library.  
+    aFileDialog  
+    > Done.
 
 ### Random Quotes Application.
 
-* Change project Ownership.
-    org.osohm
+* Change project Ownership.  
+    org.osohm  
     > Done.
 
-* Fix deprecated functionality.
-    Wakelock and KeyguardLock.
+* Fix deprecated functionality.  
+    Wakelock and KeyguardLock.  
     > Done.
 
-* Add menu of different periodic intervals.
+* Add menu of different periodic intervals.  
+    > Done.
 
 * Scan Directories.
     Support for scanning diretories and populating the book summaries list, 
-    so that you dont have to select file by file.
+    so that you dont have to select file by file.  
+    > Done.
     
 * Select Start & End Time.
-    When the picture frame turns on. When the frame turns off.
+    When the picture frame turns on. When the frame turns off.  
+    > Done.
 
 ## Posponed/Removed Features.
 ---
 
-* Open text file directly from view. (v3.0)
+* Open text file directly from view. (v3.0)  
     Could be nice (not necessary) when integrated with a nice text 
     editor and server synchronization.
  
-* Change backend storage to a databse. (v3.0)
-    Could be nice (not necessary) with large number of text files.
- 
-* Put app in f-droid (removed)
+* Change backend storage to a databse. (v3.0)  
+    Could be nice (not necessary) with large number of text files.  
+
+* Make daytime check based on alarm events, not tied to periodic updates. (v3.0)  
+    Why? is it necessary? It's not! It works well. 
+    Keep it Tied to the runnable update. You don't need it. KISS.
+
+* Put app in f-droid (removed)  
     Their instructions are terribly outdated. Had to troubleshoot 
     all their commands and in the end it didn't work, spent a day 
     on this, let's not do it again.

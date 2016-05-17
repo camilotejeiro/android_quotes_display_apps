@@ -4,10 +4,10 @@
 # ======================================================================
 
 # Android Application name
-application_name='RandomQuotesWidget'
+application_name='RandomQuotesApp'
 
 # Android app package name
-app_package_name='org.osohm.randomquoteswidget'
+app_package_name='org.osohm.randomquotesapp'
 
 lib_package_name='org.osohm.randomquoteslib'
 
