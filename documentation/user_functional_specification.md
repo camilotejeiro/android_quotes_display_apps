@@ -3,14 +3,17 @@ Quotes Display Apps Functional Specification V2.1
 
 ## Project Goal
 ---
+To display personal/book quotes in your Android device. The quotes are 
+to be read from text file(s) and displayed (one by one) in random order 
+at periodic intervals (or on screen-tap). 
 
-Develop two applications: One simple application for picture frames (e.g. 
-old android devices) and one widget application for cell-phones. The 
-general purpose of the application is to process multiple text-files and 
-break and randomize paragraphs (each paragraph is a quote), then save the 
-processed data on non-volatile memory, finally on-click or at periodic 
-intervals an UI element can read the next quote from the processed text 
-file and update the view.
+We have two applications: 
+
+* **Random Quotes App:** Application to turn an Android device into a 
+"picture frame" for displaying quotes.
+
+* **Random Quotes Widget:** Application to display the quotes in a small widget 
+in the Android device front screen. 
 
 ## Use Cases.
 ---
@@ -20,81 +23,85 @@ made (life quotes, book summaries ...etc).
 
 ### A house picture frame
 
-He would like to put his notes in a digital picture frame for displaying 
+He would like to put his quotes in a digital picture frame for displaying 
 them in the house/apt ...etc. He uses an old android phone as a picture 
 frame and installs the Random Quotes Application to display a random quote 
-at periodic intervals (every hour, every day ...etc).
+every hour.
 
 ### A personal reminder.
 
-She would like to keep her notes in her cell-phone and display a new quote 
-on Tap or at periodic Intervals. She installs the Random Quotes Widget to 
-display a random quote in her phone home screen at periodic intervals. 
+She would like to keep her favorite quotes in her cell-phone and display 
+a new quote on-tap. She installs the Random Quotes Widget and places 
+the widget in her home screen.
 
-
-## Features & Issues to Solve
+## User Features & Issues to Solve
 ---
 
 ### Random Quotes Widget
 
-* Change project Ownership.  
-    org.osohm  
+* Add support to scan directories.  
+    Support for scanning diretories and populating the book summaries 
+    list, so that you dont have to select file by file.  
     > Done.
 
-* Add menu of different periodic intervals.  
-    > Done.
+### Random Quotes Libraries.  
 
-* Scan Directories.  
-    Support for scanning diretories and populating the book summaries list,  
-    so that you dont have to select file by file.  
-    > Done.
-
-* Add support for variable widget updates.  
-    
-    
-### Random Quotes Libraries.
-* Integrated file/dir choser library.  
+* Add support for integrated file/dir choser library.  
     aFileDialog  
-    > Done.
+    > Done.  
 
 ### Random Quotes Application.
 
-* Change project Ownership.  
-    org.osohm  
-    > Done.
-
-* Fix deprecated functionality.  
-    Wakelock and KeyguardLock.  
-    > Done.
-
-* Add menu of different periodic intervals.  
-    > Done.
-
-* Scan Directories.
-    Support for scanning diretories and populating the book summaries list, 
-    so that you dont have to select file by file.  
+* Add support to scan directories.
+    Support for scanning diretories and populating the book summaries 
+    list, so that you dont have to select file by file.  
     > Done.
     
-* Select Start & End Time.
+* Add support to select daytime start & end time.  
     When the picture frame turns on. When the frame turns off.  
     > Done.
+    
+* Add support for variable quote display updates.
+    1min, 5 mins, 30 mins, 60 mins ...etc.
+    > Done.
 
-## Posponed/Removed Features.
+## Posponed Features.
 ---
 
-* Open text file directly from view. (v3.0)  
-    Could be nice (not necessary) when integrated with a nice text 
-    editor and server synchronization.
- 
-* Change backend storage to a databse. (v3.0)  
-    Could be nice (not necessary) with large number of text files.  
+**Potentially unnecessary**, postponed for later consideration. 
 
-* Make daytime check based on alarm events, not tied to periodic updates. (v3.0)  
-    Why? is it necessary? It's not! It works well. 
-    Keep it Tied to the runnable update. You don't need it. KISS.
+Can you postpone features? Group related features on same release 
+and always minimize features; Only on a *need* to have basis. 
 
-* Put app in f-droid (removed)  
-    Their instructions are terribly outdated. Had to troubleshoot 
-    all their commands and in the end it didn't work, spent a day 
-    on this, let's not do it again.
+### Random Quotes Widget
+
+* Add support for variable widget updates (v2.2).  
+    Based on an alarm utilities library.
+
+### Random Quotes Libraries. 
+* Implement Alarm Utilities Library (v2.2).
+    Functinal interface around alarm manager. Support for inexact RTC 
+    timing. 
+
+* Implement Database Storage Library (v3.0)
+    Change backend storage from SharedPreferences to SQLite.  
+    While unnecessary today, it could be nice when working with large 
+    numbers of text files. 
+
+### Random Quotes Application.
+
+* Add support for precise Daytime events (v2.2).  
+    Make daytime check based on alarm events, not tied to periodic updates.  
+    e.g. starting handler updates and turning ON the screen exactly at 
+    the user-chosen start_daytime. Stoping updates and turning the 
+    screen OFF at the user-chosen end_daytime.
+
+* Open text file directly from view. (v2.3)  
+    Could be nice when integrated with a third-party text editor and 
+    server synchronization (unison?).
     
+## Removed Features.
+---
+
+**Completely unnecessary**, remove from further consideration, purge 
+from future specs.

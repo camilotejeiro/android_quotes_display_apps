@@ -50,25 +50,6 @@
                 android:text="@string/config_scan_button" 
                 android:onClick="scanFileDirectories"/>
         </LinearLayout>
-        
-        <TextView
-            android:id="@+id/config_time_title_textview"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/config_time_title"
-            android:textAppearance="?android:attr/textAppearanceSmall" 
-            android:textStyle="bold"/> 
-        <TextView
-            android:id="@+id/config_time_period_instructions_textview"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/config_time_period_instructions"
-            android:textAppearance="?android:attr/textAppearanceSmall" />
-        <Spinner
-            android:id="@+id/config_time_period_spinner"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" 
-            android:entries="@array/config_time_period_array"/>
 
         <Button
             android:id="@+id/config_save_button"

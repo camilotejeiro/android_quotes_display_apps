@@ -1,3 +1,8 @@
+/* 
+ * Copyright (C) 2014-2016 Camilo Tejeiro 
+ * Licensed under GPLv3, see "license" file for details. 
+ */
+
 package org.osohm.randomquoteswidget;
 
 import android.app.Activity;
@@ -9,7 +14,6 @@ import android.content.ActivityNotFoundException;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
-import android.widget.Spinner;
 
 import java.io.File;
 import java.io.FilenameFilter;
@@ -25,7 +29,7 @@ import ar.com.daidalos.afiledialog.FileChooserActivity;
  * This class simply displays a configure screen 
  * where the user can input the text file(s) he wants the widget to read 
  * from.
- * @author Camilo Tejeiro ,=,e for Osohm
+ * @author Camilo Tejeiro ,=,e for Osohm 
  **********************************************************************/
 public class AppConfiguration extends Activity
 {
@@ -40,7 +44,6 @@ public class AppConfiguration extends Activity
     // view objects.
     private EditText fileEditText;
     private EditText logEditText;
-    private Spinner timePeriodSpinner;
                 
     // declare and reset our AppwidgetID.
     private int myAppWidgetId = AppWidgetManager.INVALID_APPWIDGET_ID;
@@ -79,9 +82,6 @@ public class AppConfiguration extends Activity
         // we will have a file name input that can be configured in the widget.
         fileEditText = (EditText) findViewById(R.id.config_files_edittext);
         
-        // Spinner, dropdown menu.
-        timePeriodSpinner = (Spinner) findViewById(R.id.config_time_period_spinner);
-        
         // Where we will display messages regarding configuration details.
         logEditText = (EditText) findViewById(R.id.config_log_edittext);
     }
@@ -116,18 +116,11 @@ public class AppConfiguration extends Activity
         
         // get the user input.
         String userFilePaths = fileEditText.getText().toString();
-        // Convert time properties to ints.
-        int userTimePeriod = Integer.parseInt(timePeriodSpinner.getSelectedItem().toString());
         
         // display user file paths.
         configMessageLog = "User File Paths: " + userFilePaths;
         Log.d(LOG_TAG, configMessageLog);
         logEditText.append("* " + configMessageLog + "\n");
-
-       // display user time properties.
-        configMessageLog = "Time Period (Mins): " + userTimePeriod;
-        Log.d(LOG_TAG, configMessageLog);
-        logEditText.append("* " + configMessageLog + "\n"); 
 
         // now lets break the string by our separator.
         String[] filePathsArray = userFilePaths.split(";"); 
@@ -155,9 +148,6 @@ public class AppConfiguration extends Activity
 
         // let's store the valid user filePaths.
         storedPreferences.updateUserFilePaths(filePathsArray);
-          
-        // store the time properties in mS.
-        storedPreferences.updateUserTimePeriod(userTimePeriod*MINS_TO_MS_CONVERSION_FACTOR);
 
         configMessageLog = "Processing Text Files to Quotes";
         Log.d(LOG_TAG, configMessageLog);

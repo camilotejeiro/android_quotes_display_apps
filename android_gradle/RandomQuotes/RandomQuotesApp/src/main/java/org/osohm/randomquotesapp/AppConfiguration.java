@@ -1,3 +1,8 @@
+/* 
+ * Copyright (C) 2014-2016 Camilo Tejeiro
+ * Licensed under GPLv3, see "license" file for details. 
+ */
+
 package org.osohm.randomquotesapp;
 
 import android.app.Activity;

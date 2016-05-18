@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+<svg id="svg951" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns="http://www.w3.org/2000/svg" height="187.33" width="341.35" version="1.0" xmlns:cc="http://web.resource.org/cc/" xmlns:dc="http://purl.org/dc/elements/1.1/">
+ <metadata id="metadata3">
+  <rdf:RDF>
+   <cc:Work rdf:about="">
+    <dc:title>Open Book</dc:title>
+    <dc:description/>
+    <dc:subject>
+     <rdf:Bag>
+      <rdf:li>hash</rdf:li>
+      <rdf:li/>
+      <rdf:li>education</rdf:li>
+      <rdf:li>book</rdf:li>
+     </rdf:Bag>
+    </dc:subject>
+    <dc:publisher>
+     <cc:Agent rdf:about="http://www.openclipart.org">
+      <dc:title>Nathan Eady</dc:title>
+     </cc:Agent>
+    </dc:publisher>
+    <dc:creator>
+     <cc:Agent>
+      <dc:title>Nathan Eady</dc:title>
+     </cc:Agent>
+    </dc:creator>
+    <dc:rights>
+     <cc:Agent>
+      <dc:title>Nathan Eady</dc:title>
+     </cc:Agent>
+    </dc:rights>
+    <dc:date/>
+    <dc:format>image/svg+xml</dc:format>
+    <dc:type rdf:resource="http://purl.org/dc/dcmitype/StillImage"/>
+    <cc:license rdf:resource="http://web.resource.org/cc/PublicDomain"/>
+    <dc:language>en</dc:language>
+   </cc:Work>
+   <cc:License rdf:about="http://web.resource.org/cc/PublicDomain">
+    <cc:permits rdf:resource="http://web.resource.org/cc/Reproduction"/>
+    <cc:permits rdf:resource="http://web.resource.org/cc/Distribution"/>
+    <cc:permits rdf:resource="http://web.resource.org/cc/DerivativeWorks"/>
+   </cc:License>
+  </rdf:RDF>
+ </metadata>
+ <g id="g2159" transform="translate(-11.696 -15.795)" stroke="#000" fill="none">
+  <path id="path3139" stroke-linejoin="round" d="m136.84 45.578c1.17-0.902 12.12-15.68 42.31-21.728 23.71-5.101 32.51-2.893 57.89-0.017 61.64 41.406 61.6 41.144 111.01 75.026-0.15 15.151 0.4 19.331 0 27.881-59.73-4.42-83.98 12.42-118.14 32.67-53.26-2.82-109.56 14.6-138.36 35.05-13.606 7.04-11.307 1.79-12.081 1.61-0.866-0.21-61.982-103.2-62.704-104.65-0.845-1.686 7.311-23.185 8.224-23.641 0.946-0.473 10.769-14.808 43.894-24.402 37.817-10.951 67.947-0.529 69.337 0.165 2.92 1.462 81.73 85.068 82.97 86.308-41.67-0.63-92.08 2.1-132.02 32.75-0.897 1.57-58.812-95.235-60.004-96.427" stroke-width="10"/>
+  <path id="path3141" d="m221.84 129.39c34.11-30.243 80.98-36.709 124.86-30.827" stroke-linecap="round" stroke-width="11"/>
+  <path id="path3143" d="m89.912 161.67c-4.172 3.56-10.181 35.01-7.627 34.65" stroke-width="11"/>
+ </g>
+</svg>
