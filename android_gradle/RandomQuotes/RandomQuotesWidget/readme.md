@@ -1,7 +1,5 @@
 Random Quotes Widget
 ====================
 
-The purpose of this application is to be able place and configure a home 
-screen widget to display one new quote for the user (onTap or at periodic 
-intervals).
-
+This application can be used to display quotes in a small widget in 
+the Android device front screen. 

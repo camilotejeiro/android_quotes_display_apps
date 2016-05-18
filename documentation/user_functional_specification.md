@@ -37,7 +37,14 @@ the widget in her home screen.
 ## User Features & Issues to Solve
 ---
 
+* One **major feature per major release**: v1, v2, v3 ...etc.
+* Minor features and bugfixes are minor releases: v1.1, v1.2 ... etc
+
 ### Random Quotes Widget
+
+* Create Widget Logo.
+    SVG -> multiple .png sizes.
+    > Done.
 
 * Add support to scan directories.  
     Support for scanning diretories and populating the book summaries 
@@ -51,6 +58,10 @@ the widget in her home screen.
     > Done.  
 
 ### Random Quotes Application.
+
+* Create App Logo.
+    SVG -> multiple .png sizes.
+    > Done.
 
 * Add support to scan directories.
     Support for scanning diretories and populating the book summaries 
@@ -70,10 +81,10 @@ the widget in her home screen.
 
 **Potentially unnecessary**, postponed for later consideration. 
 
-Can you postpone features? Group related features on same release 
-and always minimize features; Only on a *need* to have basis. 
-
 ### Random Quotes Widget
+
+* User Wiki (v2.2).
+    For public collaboration.
 
 * Add support for variable widget updates (v2.2).  
     Based on an alarm utilities library.
@@ -89,6 +100,9 @@ and always minimize features; Only on a *need* to have basis.
     numbers of text files. 
 
 ### Random Quotes Application.
+
+* User Wiki (v2.2).
+    For public collaboration.
 
 * Add support for precise Daytime events (v2.2).  
     Make daytime check based on alarm events, not tied to periodic updates.  

@@ -1,7 +1,5 @@
 Random Quotes App
 =================
 
-This application can be used to display user quotes in an android picture 
-frame (perhaps an old phone :)), You just need to configure it (pass it 
-some text file(s)) and it will display one new quote onTap or at periodic 
-intervals.
+This Application can be used to turn an Android device into a 
+"picture frame" for displaying quotes (perhaps an old phone :)).
