@@ -68,7 +68,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title></dc:title>
+        <dc:title />
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -78,10 +78,7 @@
      id="layer1"
      transform="translate(0,-540.36218)">
     <g
-       id="g3319"
-       inkscape:export-filename="/media/camilo/main_storage/workspaces/osohm/quote_display_apps/logo/random_quotes_widget_icon_ldpi.png"
-       inkscape:export-xdpi="6.328125"
-       inkscape:export-ydpi="6.328125">
+       id="g3246">
       <rect
          ry="49.902534"
          y="540.86121"
