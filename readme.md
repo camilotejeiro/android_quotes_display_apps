@@ -1,5 +1,5 @@
-Quote Display Applications
-==========================
+Quotes Display Applications
+===========================
 
 _A quote a day? That would be nice, wouldn't it?_
 
@@ -33,8 +33,24 @@ For documentation and upcoming features, see the
 ## Development
 
 All the development was done using Gradle and the android tools 
-directly from the command line (No bloated IDEs). See the 
-scripts [here](android_gradle/bin)
+directly from the command line (No bloated IDEs). It's actually pretty 
+straightforward after you get the hold of it.
+
+[Using gradle to build Android apps from the CLI](https://developer.android.com/studio/build/building-cmdline.html)  
+
+The Gradle build process mostly involves two commands:  
+
+- Build Debug:  
+    > gradle assembleDebug
+
+- Build Release (signed apps with your own keys):  
+    > gradle assembleRelease
+
+Once the application builds you can use the [following scripts](android_gradle/bin) 
+to install and debug your application.
+
+If you need more, you can write your own little scripts, it's actually 
+quite nice.
 
 ## License
 
