@@ -3,25 +3,43 @@ Quote Display Applications
 
 _A quote a day? That would be nice, wouldn't it?_
 
-That's what I thought too, and that's why I created these apps. 
+That's what we thought too, and that's why we created these apps. 
 
-You can use these apps to display personal/book quotes in your Android 
-device. The quotes are to be read from text file(s) and displayed 
-(one by one) in random order at periodic intervals (or on screen-tap). 
+You can use these _open source_ apps to display personal/book quotes 
+in your Android device. The quotes are read from text file(s) and 
+displayed (one by one) in random order at periodic intervals (or on 
+screen-tap). 
 
-See more details in the individual readme for each app:
+## Random Quotes App
 
-* [Random Quotes App](android_gradle/RandomQuotes/RandomQuotesApp):  
-    Application to turn an Android device into a "picture frame" for 
-    displaying quotes.
+Application to turn an Android device into a "picture frame" for 
+displaying quotes.
 
-* [Random Quotes Widget](android_gradle/RandomQuotes/RandomQuotesWidget):  
-    Application to display the quotes in a small widget in the Android 
-    device front screen.
+* [Google Play Store Download Link](https://play.google.com/store/apps/details?id=org.osohm.randomquotesapp&hl=en)
+* [More Details - Source Code](android_gradle/RandomQuotes/RandomQuotesApp)
 
-For more details about these apps and to check upcoming features, see 
-the [user documentation](documentation/user_functional_specification.md).  
+## Random Quotes Widget
 
-I am sharing these aplications under the assumption that they can provide 
-some value to others, but with no warranties of any kind. See the 
+Application to display your quotes in a small widget in the Android device front screen.
+
+* [Google Play Store Download Link](https://play.google.com/store/apps/details?id=org.osohm.randomquoteswidget&hl=en)
+* [More Details - Source Code](android_gradle/RandomQuotes/RandomQuotesWidget)
+
+## Documentation
+
+For documentation and upcoming features, see the 
+[user documentation](documentation/user_functional_specification.md).  
+
+## Development
+
+All the development was done using Gradle and the android tools 
+directly from the command line (No bloated IDEs). See the 
+scripts [here](android_gradle/bin)
+
+## License
+
+These applications were created to meet our needs, we are sharing them 
+under the assumption that they can provide some value to others, but 
+with no warranties of any kind; without even the implied warranty of 
+merchantability or fitness for any particular purpose. See the 
 [GPLv3 license file](license.md) for more details. 
