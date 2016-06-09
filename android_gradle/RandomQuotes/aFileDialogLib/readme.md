@@ -1,9 +1,8 @@
 aFileDialog Library
 ===================
 
-This library is largely adapted from the work of 
-[Jose F. Maldonado](http://jfmdev.github.io/), he gets the credit 
-**Thanks!**
+This library is the work of [Jose F. Maldonado](http://jfmdev.github.io/), 
+he gets the credit **Thanks!**
 
 If you intend to use this file/directory picker library, 
 please see the demo he has in the play store and visit his GitHub 
