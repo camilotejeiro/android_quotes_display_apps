@@ -89,6 +89,8 @@ the widget in her home screen.
 * Add support for variable widget updates (v2.2).  
     Based on an alarm utilities library.
 
+* Add support for different font and background colors (v2.2).
+
 ### Random Quotes Libraries. 
 * Implement Alarm Utilities Library (v2.2).
     Functinal interface around alarm manager. Support for inexact RTC 
@@ -103,6 +105,8 @@ the widget in her home screen.
 
 * User Wiki (v2.2).
     For public collaboration.
+
+* Add support for different font and background colors (v2.2).
 
 * Add support for precise Daytime events (v2.2).  
     Make daytime check based on alarm events, not tied to periodic updates.  
