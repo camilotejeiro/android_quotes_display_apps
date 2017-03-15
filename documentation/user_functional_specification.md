@@ -83,19 +83,23 @@ the widget in her home screen.
 
 ### Random Quotes Widget
 
-* User Wiki (v2.2).
+* User Wiki (v2.3).
     For public collaboration.
 
 * Add support for variable widget updates (v2.2).  
     Based on an alarm utilities library.
 
-* Add support for different font and background colors (v2.2).
+* Add support for different fonts/sizes (for different screen devices) and background colors (v2.2).
 
 ### Random Quotes Libraries. 
 * Implement Alarm Utilities Library (v2.2).
-    Functinal interface around alarm manager. Support for inexact RTC 
+    Functional interface around alarm manager. Support for inexact RTC 
     timing. 
-
+    
+* Implement Errata Library Functionality (v2.2)  
+    On tap add current quote information to text file.  
+    To ease noting which quotes need to be fixed in the future i.e. when going over the errata text file.  
+    
 * Implement Database Storage Library (v3.0)
     Change backend storage from SharedPreferences to SQLite.  
     While unnecessary today, it could be nice when working with large 
@@ -103,23 +107,24 @@ the widget in her home screen.
 
 ### Random Quotes Application.
 
-* User Wiki (v2.2).
+* User Wiki (v2.3).
     For public collaboration.
 
 * Add support for different font and background colors (v2.2).
 
-* Add support for precise Daytime events (v2.2).  
+* Add support for precise Daytime events (v2.3).  
     Make daytime check based on alarm events, not tied to periodic updates.  
     e.g. starting handler updates and turning ON the screen exactly at 
     the user-chosen start_daytime. Stoping updates and turning the 
     screen OFF at the user-chosen end_daytime.
-
-* Open text file directly from view. (v2.3)  
-    Could be nice when integrated with a third-party text editor and 
-    server synchronization (unison?).
     
 ## Removed Features.
 ---
 
 **Completely unnecessary**, remove from further consideration, purge 
 from future specs.
+
+* Open text file directly from view.  
+    Could be nice when integrated with a third-party text editor and 
+    server synchronization (unison?).  
+    > Postponed: Not currently necessary/practical. 
