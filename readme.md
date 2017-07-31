@@ -1,3 +1,6 @@
+**These Applications are not actively maintained** 
+_Feel free to fork/clone this repository if you would like to implement new features/functionality._
+
 Quotes Display Applications
 ===========================
 
@@ -36,7 +39,7 @@ All the development was done using Gradle and the android tools
 directly from the command line (No bloated IDEs). It's actually pretty 
 straightforward after you get the hold of it.
 
-[Using gradle to build Android apps from the CLI](https://developer.android.com/studio/build/building-cmdline.html)  
+[Using gradle to build Android apps from the CLI](https://spring.io/guides/gs/gradle-android/)  
 
 The Gradle build process mostly involves two commands:  
 
