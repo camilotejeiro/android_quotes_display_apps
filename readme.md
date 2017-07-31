@@ -1,4 +1,5 @@
-**These Applications are not actively maintained** 
+**These Applications are not actively maintained**  
+
 _Feel free to fork/clone this repository if you would like to implement new features/functionality._
 
 Quotes Display Applications
