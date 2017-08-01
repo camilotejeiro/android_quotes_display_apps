@@ -1,4 +1,4 @@
-**These applications are no longer maintained.**
+**Note: These applications are not maintained.**
 
 _Feel free to fork/clone this repository if you would like to implement new features/functionality to fit your purposes._
 
@@ -31,7 +31,7 @@ Application to display your quotes in a small widget in the Android device front
 
 ## Documentation
 
-For documentation and upcoming features, see the 
+For documentation, see the 
 [user documentation](documentation/user_functional_specification.md).  
 
 ## Development
@@ -45,8 +45,6 @@ straightforward after you get the hold of it.
     - Avoid the bloated RAM consuming monster (Android Studio): 3GB RAM minimum, 8 GB recommended... No thanks.
 
 * [Installing Gradle](https://gradle.org/install/)
-  
-* [Using gradle to build Android apps from the CLI](https://spring.io/guides/gs/gradle-android/)  
 
 * [Gradle user docs](https://docs.gradle.org/current/userguide/userguide.html)
 
