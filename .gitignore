@@ -26,7 +26,7 @@
 # ignore gradle props.
 *.gradle/
 
-# ignore gradle build directories.
+# ignore gradle generated dirs (except for build directories).
 *generated/
 *intermediates/
 *tmp/
