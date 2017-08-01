@@ -1,4 +1,4 @@
-**These Applications are not actively maintained.**
+**These Applications are no longer maintained.**
 
 _Feel free to fork/clone this repository if you would like to implement new features/functionality to fit your purposes._
 
@@ -40,7 +40,15 @@ All the development was done using Gradle and the android tools
 directly from the command line (No bloated IDEs). It's actually pretty 
 straightforward after you get the hold of it.
 
-[Using gradle to build Android apps from the CLI](https://spring.io/guides/gs/gradle-android/)  
+* Get[Android SDK -- just the command line tools](https://developer.android.com/studio/index.html): 
+    - Scroll to the bottom of the page.
+    - Avoid the bloated RAM consuming monster (Android Studio): 3GB RAM minimum, 8 GB recommended... No thanks.
+
+* [Installing Gradle](https://gradle.org/install/)
+  
+* [Using gradle to build Android apps from the CLI](https://spring.io/guides/gs/gradle-android/)  
+
+* [Gradle user docs](https://docs.gradle.org/current/userguide/userguide.html)
 
 The Gradle build process mostly involves two commands:  
 
