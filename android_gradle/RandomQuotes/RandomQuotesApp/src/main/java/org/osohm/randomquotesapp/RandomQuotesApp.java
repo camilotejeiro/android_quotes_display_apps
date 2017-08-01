@@ -333,6 +333,15 @@ public class RandomQuotesApp extends Activity
             + currentAppData[2] + ", " + currentAppData[3] + ", " 
             + currentAppData[4] + "]");
         
+        // Make sure to sanitize text, we can not display empty quotes.
+        // Instead, display a helpful message to correct the text file.
+        if (currentAppData[2].isEmpty() == true)
+        {
+            currentAppData[2]="Empty quote: Empty paragraph in text file. " + 
+            "Make a note of the line number below and fix your text file later. " + 
+            "Tap to continue.";
+        } 
+           
         // set quotes queue: index/lenght
         quotesIndexView.setText("queue number: " 
             + currentAppData[0] + "/" + currentAppData[1]);
@@ -343,8 +352,5 @@ public class RandomQuotesApp extends Activity
         fileNameView.setText(fileName);
         // set line number
         lineNumberView.setText("line number: " + currentAppData[4]);
-        
-        
-        
     }
 }

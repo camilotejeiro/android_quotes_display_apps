@@ -138,6 +138,15 @@ public class RandomQuotesWidget extends AppWidgetProvider
             + currentWidgetData[1] + ", " + currentWidgetData[2] + ", " 
             + currentWidgetData[3] + ", " + currentWidgetData[4] + "]");
         
+        // Make sure to sanitize text, we can not display empty quotes.
+        // Instead, display a helpful message to correct the text file.
+        if (currentWidgetData[2].isEmpty() == true)
+        {
+            currentWidgetData[2]="Empty quote: Empty paragraph in text file. " + 
+            "Make a note of the line number below and fix your text file later. " + 
+            "Tap to continue.";
+        } 
+
         // Construct the RemoteViews object.  It takes the package name (in our case, it's our
         // package, but it needs this because on the other side it's the widget host inflating
         // the widget_layout from our package).

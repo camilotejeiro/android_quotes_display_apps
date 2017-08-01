@@ -2,7 +2,7 @@ buildscript
 {
     repositories 
     {
-        mavenCentral()
+        jcenter()
     }
     dependencies 
     {
@@ -19,8 +19,8 @@ android
 
     defaultConfig 
     {
-        versionCode 3
-        versionName "2.1"
+        versionCode 4
+        versionName "2.2"
         targetSdkVersion 19
         minSdkVersion 16
     }
