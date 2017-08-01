@@ -40,7 +40,7 @@ All the development was done using Gradle and the android tools
 directly from the command line (No bloated IDEs). It's actually pretty 
 straightforward after you get the hold of it.
 
-* Get[Android SDK -- just the command line tools](https://developer.android.com/studio/index.html): 
+* Get [Android SDK -- just the command line tools](https://developer.android.com/studio/index.html): 
     - Scroll to the bottom of the page.
     - Avoid the bloated RAM consuming monster (Android Studio): 3GB RAM minimum, 8 GB recommended... No thanks.
 
