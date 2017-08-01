@@ -44,7 +44,8 @@ straightforward after you get the hold of it.
     - Scroll to the bottom of the page.
     - Avoid the bloated RAM consuming monster (Android Studio): 3GB RAM minimum, 8 GB recommended... No thanks.
 
-* [Installing Gradle](https://gradle.org/install/)
+* [Installing Gradle](https://gradle.org/install/): note these applications were built using **Gradle 2.10**.
+    - Dependencies might differ for newer Gradle versions.
 
 * [Gradle user docs](https://docs.gradle.org/current/userguide/userguide.html)
 
@@ -55,7 +56,7 @@ The Gradle build process mostly involves two commands:
 - Build Release (signed apps with your own keys):  
     > gradle assembleRelease
 
-Once the application builds you can use the [following scripts](android_gradle/bin) 
+Once the application builds you can use the [following bash scripts](android_gradle/bin) 
 to install and debug your application.
 
 If you need more, you can write your own little scripts, it's actually 
