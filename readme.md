@@ -1,4 +1,4 @@
-**Note: These applications are not maintained.**
+**Note: These applications are not actively maintained.**
 
 _Feel free to fork/clone this repository if you would like to implement new features/functionality to fit your purposes._
 
