@@ -9,6 +9,9 @@
 # Ignore any static reference-only projects.
 *-v*
 
+# Ignore any compressed archives.
+*.zip
+
 # Ignore any project personal notes
 *notes/*
 
